@@ -1,7 +1,7 @@
 <div class="searches">
     <input id="search_field" type="text" id="search" placeholder="Sök på nyckelord" />
     <button onclick="search_mon()" id="search_button">Sök</button>
-    <button onclick="clear_all()" id="clear_button">Rensa</button>
+    <button onclick="clear_search()" id="clear_button">Rensa</button>
 
 
     <select class="group" name="group" id="group">
@@ -14,6 +14,12 @@
         <option value="B2">B2</option>
     </select>
 
+    <div class="date">
+        <input type="date" class="thisdate" id="mon_date" name="date" value="2024-08-01" min="2024-01-01"
+            max="2030-12-31" />
+    </div>
+
+
     <button id="create" onclick="createFile_mon()">Skapa pass</button>
 
 </div>
@@ -24,22 +30,22 @@
 
     <tr style="margin-bottom: 10px;">
         <th class="yellowwhite"
-            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 9px, #EDF060 0px, #EDF060 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #EDF060 8px, #EDF060 28px);border: 1px solid #24292e38;">
         </th>
         <th class="yellow"
-            style="background: repeating-linear-gradient( 180deg, #EDF060, #EDF060 9px, #FFffff 0px, #FFffff 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #EDF060, #EDF060 14px, #FFffff 8px, #FFffff 28px);border: 1px solid #24292e38;">
         </th>
         <th class="orangewhite"
-            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 9px, #F0803C 0px, #F0803C 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #F0803C 8px, #F0803C 28px);border: 1px solid #24292e38;">
         </th>
         <th class="orange"
-            style="background: repeating-linear-gradient( 180deg, #F0803C, #F0803C 9px, #FFffff 0px, #FFffff 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #F0803C, #F0803C 14px, #FFffff 8px, #FFffff 28px);border: 1px solid #24292e38;">
         </th>
         <th class="greenwhite"
-            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 9px, #519872 0px, #519872 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #519872 8px, #519872 28px);border: 1px solid #24292e38;">
         </th>
         <th class="green"
-            style="background: repeating-linear-gradient( 180deg, #519872, #519872 9px, #FFffff 0px, #FFffff 28px); border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #519872, #519872 14px, #FFffff 8px, #FFffff 28px); border: 1px solid #24292e38;">
         </th>
     </tr>
 
@@ -118,22 +124,22 @@
 
     <tr style="margin-bottom: 10px;">
         <th class="yellowwhite"
-            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 9px, #EDF060 0px, #EDF060 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #EDF060 8px, #EDF060 28px);border: 1px solid #24292e38;">
         </th>
         <th class="yellow"
-            style="background: repeating-linear-gradient( 180deg, #EDF060, #EDF060 9px, #FFffff 0px, #FFffff 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #EDF060, #EDF060 14px, #FFffff 8px, #FFffff 28px);border: 1px solid #24292e38;">
         </th>
         <th class="orangewhite"
-            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 9px, #F0803C 0px, #F0803C 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #F0803C 8px, #F0803C 28px);border: 1px solid #24292e38;">
         </th>
         <th class="orange"
-            style="background: repeating-linear-gradient( 180deg, #F0803C, #F0803C 9px, #FFffff 0px, #FFffff 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #F0803C, #F0803C 14px, #FFffff 8px, #FFffff 28px);border: 1px solid #24292e38;">
         </th>
         <th class="greenwhite"
-            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 9px, #519872 0px, #519872 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #519872 8px, #519872 28px);border: 1px solid #24292e38;">
         </th>
         <th class="green"
-            style="background: repeating-linear-gradient( 180deg, #519872, #519872 9px, #FFffff 0px, #FFffff 28px); border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #519872, #519872 14px, #FFffff 8px, #FFffff 28px); border: 1px solid #24292e38;">
         </th>
     </tr>
 
@@ -345,22 +351,22 @@
 
     <tr style="margin-bottom: 10px;">
         <th class="yellowwhite"
-            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 9px, #EDF060 0px, #EDF060 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #EDF060 8px, #EDF060 28px);border: 1px solid #24292e38;">
         </th>
         <th class="yellow"
-            style="background: repeating-linear-gradient( 180deg, #EDF060, #EDF060 9px, #FFffff 0px, #FFffff 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #EDF060, #EDF060 14px, #FFffff 8px, #FFffff 28px);border: 1px solid #24292e38;">
         </th>
         <th class="orangewhite"
-            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 9px, #F0803C 0px, #F0803C 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #F0803C 8px, #F0803C 28px);border: 1px solid #24292e38;">
         </th>
         <th class="orange"
-            style="background: repeating-linear-gradient( 180deg, #F0803C, #F0803C 9px, #FFffff 0px, #FFffff 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #F0803C, #F0803C 14px, #FFffff 8px, #FFffff 28px);border: 1px solid #24292e38;">
         </th>
         <th class="greenwhite"
-            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 9px, #519872 0px, #519872 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #519872 8px, #519872 28px);border: 1px solid #24292e38;">
         </th>
         <th class="green"
-            style="background: repeating-linear-gradient( 180deg, #519872, #519872 9px, #FFffff 0px, #FFffff 28px); border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #519872, #519872 14px, #FFffff 8px, #FFffff 28px); border: 1px solid #24292e38;">
         </th>
     </tr>
 
@@ -396,22 +402,22 @@
 
     <tr style="margin-bottom: 10px;">
         <th class="yellowwhite"
-            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 9px, #EDF060 0px, #EDF060 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #EDF060 8px, #EDF060 28px);border: 1px solid #24292e38;">
         </th>
         <th class="yellow"
-            style="background: repeating-linear-gradient( 180deg, #EDF060, #EDF060 9px, #FFffff 0px, #FFffff 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #EDF060, #EDF060 14px, #FFffff 8px, #FFffff 28px);border: 1px solid #24292e38;">
         </th>
         <th class="orangewhite"
-            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 9px, #F0803C 0px, #F0803C 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #F0803C 8px, #F0803C 28px);border: 1px solid #24292e38;">
         </th>
         <th class="orange"
-            style="background: repeating-linear-gradient( 180deg, #F0803C, #F0803C 9px, #FFffff 0px, #FFffff 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #F0803C, #F0803C 14px, #FFffff 8px, #FFffff 28px);border: 1px solid #24292e38;">
         </th>
         <th class="greenwhite"
-            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 9px, #519872 0px, #519872 28px);border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #519872 8px, #519872 28px);border: 1px solid #24292e38;">
         </th>
         <th class="green"
-            style="background: repeating-linear-gradient( 180deg, #519872, #519872 9px, #FFffff 0px, #FFffff 28px); border: 1px solid #24292e38;">
+            style="background: repeating-linear-gradient( 180deg, #519872, #519872 14px, #FFffff 8px, #FFffff 28px); border: 1px solid #24292e38;">
         </th>
     </tr>
 
@@ -438,7 +444,7 @@
 
 </table>
 
-<h3>Grunläggande tekniker</h3>
+<h3 id="grund_tit">GRUNDLÄGGANDE TEKNIKER</h3>
 
 <table id="grund">
     <tr>

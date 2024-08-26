@@ -43,6 +43,10 @@ async function router() {
     document.querySelector('main').innerHTML = content;
     route === '/partials/mon.html' && listen_click();
     route === '/partials/kuy.html' && listen_click();
+    route === '/partials/mon.html' && setDate();
+    route === '/partials/kuy.html' && setDate();
+    route === '/partials/statistics.html' && setDate();
+
 
 }
 

@@ -1,7 +1,7 @@
 <div class="searches">
     <input id="search_field" type="text" id="search" placeholder="Sök på nyckelord" />
     <button onclick="search_kuy()" id="search_button">Sök</button>
-    <button onclick="clear_all()" id="clear_button">Rensa</button>
+    <button onclick="clear_search()" id="clear_button">Rensa</button>
 
 
     <select class="group" name="group" id="group">
@@ -10,6 +10,12 @@
         <option value="V2">V2</option>
         <option value="S1">S1</option>
     </select>
+
+    <div class="date">
+        <input type="date" class="thisdate" id="kuy_date" name="date" value="2024-08-01" min="2024-01-01"
+            max="2030-12-31" />
+    </div>
+
 
     <button id="create" onclick="createFile_kuy()">Skapa pass</button>
 
@@ -528,7 +534,7 @@
 
 </table>
 
-<h3>Grunläggande tekniker</h3>
+<h3 id="grund_tit">GRUNDLÄGGANDE TEKNIKER</h3>
 
 <table id="grund">
     <tr>

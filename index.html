@@ -93,11 +93,11 @@
 
         window.getgroupstat = getgroupstat;
 
-        async function getpass(date) {
+        async function getpass(date, group) {
             const app = window.app;
             const db = getFirestore(app);
 
-            const q = query(collection(db, "pass"), where("date", "==", `${date}`))
+            const q = query(collection(db, "pass"), where("date", "==", `${date}`), where("group", "==", `${group}`))
 
             let result = [];
 

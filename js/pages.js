@@ -1,3 +1,7 @@
+function setDate() {
+    document.querySelector('.thisdate').valueAsDate = new Date();
+}
+
 function listen_click() {
     let tds = document.querySelectorAll(`td`);
     tds.forEach((td) => {
@@ -65,8 +69,8 @@ function createFile_mon() {
     let content = "";
     let statistics = "";
     let colors = [];
-    let date = new Date();
-    content += date.toISOString().split('T')[0] + "\n\n"
+    let date = document.getElementById("mon_date");
+    date = date.value;
     content += "6:e mon (vit-gult): \n";
 
     let yellow = true;
@@ -135,7 +139,7 @@ function createFile_mon() {
         content += element + "\n"
     });
 
-    let file = new File(["\ufeff" + content], `pass.txt`, { type: "text/plain:charset=UTF-8" });
+    let file = new File(["\ufeff" + content], `${group}_${date}.txt`, { type: "text/plain:charset=UTF-8" });
 
     url = window.URL.createObjectURL(file);
 
@@ -162,6 +166,8 @@ function search_mon() {
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 td.click();
             } else {
+                td.style.color = "white";
+
             }
         }
 
@@ -171,6 +177,8 @@ function search_mon() {
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 td.click();
             } else {
+                td.style.color = "white";
+
             }
         }
 
@@ -180,6 +188,8 @@ function search_mon() {
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 td.click();
             } else {
+                td.style.color = "white";
+
             }
         }
 
@@ -189,6 +199,8 @@ function search_mon() {
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 td.click();
             } else {
+                td.style.color = "white";
+
             }
         }
 
@@ -198,6 +210,8 @@ function search_mon() {
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 td.click();
             } else {
+                td.style.color = "white";
+
             }
         }
 
@@ -207,6 +221,8 @@ function search_mon() {
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 td.click();
             } else {
+                td.style.color = "white";
+
             }
         }
     }
@@ -217,12 +233,18 @@ function clear_all() {
     console.log(tds);
     for (let td of tds) {
         td?.classList.remove('chosen');
-        console.log("chosen remove");
 
         if (td.innerHTML != "") {
+            td.style.color = "black";
             td.style.backgroundColor = 'rgb(255, 255, 255)';
         }
     }
+}
+
+function clear_search() {
+    let input = document.getElementById("search_field");
+    input.value = "";
+    clear_all()
 }
 
 function createFile_kuy() {
@@ -266,8 +288,8 @@ function createFile_kuy() {
     let content = "";
     let statistics = "";
     let colors = [];
-    let date = new Date();
-    content += date.toISOString().split('T')[0] + "\n\n"
+    let date = document.getElementById("kuy_date");
+    date = date.value;
     content += "5:e kuy: \n";
 
     let orange = true;
@@ -330,7 +352,7 @@ function createFile_kuy() {
         content += element + "\n"
     });
 
-    let file = new File(["\ufeff" + content], `pass.txt`, { type: "text/plain:charset=UTF-8" });
+    let file = new File(["\ufeff" + content], `${group}_${date}.txt`, { type: "text/plain:charset=UTF-8" });
 
     url = window.URL.createObjectURL(file);
 
@@ -359,6 +381,7 @@ function search_kuy() {
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 td.click();
             } else {
+                td.style.color = "white";
             }
         }
 
@@ -368,6 +391,8 @@ function search_kuy() {
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 td.click();
             } else {
+                td.style.color = "white";
+
             }
         }
 
@@ -377,6 +402,8 @@ function search_kuy() {
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 td.click();
             } else {
+                td.style.color = "white";
+
             }
         }
 
@@ -386,6 +413,8 @@ function search_kuy() {
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 td.click();
             } else {
+                td.style.color = "white";
+
             }
         }
 
@@ -395,6 +424,8 @@ function search_kuy() {
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 td.click();
             } else {
+                td.style.color = "white";
+
             }
         }
     }
@@ -406,13 +437,13 @@ function get_group_statistics() {
 
     getgroupstat(group).then(function (reply) {
 
-        fill_result(reply);
+        fill_result(reply, true);
 
     });
 
 }
 
-function fill_result(reply) {
+function fill_result(reply, pass_count) {
 
     let HTML = `<table style="border-collapse: separate;empty-cells: hide;">`;
 
@@ -503,7 +534,14 @@ function fill_result(reply) {
             }
 
         }
-        HTML += `<td style="width:50vw;"> ${element.teknik}</td><td style="width:42px;"> ${element.count}</td></tr> `
+
+        if (pass_count) {
+            HTML += `<td style="width:50vw;"> ${element.teknik}</td><td style="width:42px;"> ${element.count}</td></tr> `
+
+        } else {
+            HTML += `<td style="width:50vw;"> ${element.teknik}</td></tr> `
+
+        }
     });
 
     HTML += '</table>'
@@ -516,12 +554,15 @@ function fill_result(reply) {
 
 function find_pass() {
 
-    let start = document.getElementById("date");
+    let start = document.getElementById("stat_pass_date");
     let date = start.value;
 
-    getpass(date).then(function (reply) {
+    let gr = document.getElementById("stat_pass_group");
+    let group = gr.value;
 
-        fill_result(reply);
+    getpass(date, group).then(function (reply) {
+
+        fill_result(reply, false);
 
     });
 
