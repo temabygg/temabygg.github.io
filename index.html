@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassApp</title>
+    <link rel="stylesheet" href="/css/common.css">
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        let config = {
+            apiKey: "AIzaSyAyDTREjwkpwNbtyqdcJ1tO7YVq0eCjPJg",
+            authDomain: "passapp-968d0.firebaseapp.com",
+            projectId: "passapp-968d0",
+            storageBucket: "passapp-968d0.appspot.com",
+            messagingSenderId: "177320803164",
+            appId: "1:177320803164:web:a73864047475a355cc1f99",
+            measurementId: "G-JW87LW315E"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(config);
+        window.app = app;
+
+    </script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a class="navigation active" href="/">START</a>
+            <a class="navigation" href="/mon">MON</a>
+            <a class="navigation" href="/kuy">KUY</a>
+            <a class="navigation" href="/statistics">STATISTIK</a>
+
+        </nav>
+    </header>
+    <main>
+
+    </main>
+    <script src="/js/main.js"></script>
+    <script src="/js/pages.js"></script>
+
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase.js"></script>
+
+    <script type="module">
+
+        import { doc, collection, addDoc, getFirestore } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
+
+        async function savepass(teknik, group, color) {
+            console.log('here');
+            const app = window.app;
+            const db = getFirestore(app);
+
+            let date = Date.now();
+
+            await addDoc(collection(db, "pass"), {
+                teknik: teknik,
+                group: group,
+                color: color,
+                date: date
+            });
+
+        }
+
+        window.savepass = savepass;
+    </script>
+</body>
+
+</html>
