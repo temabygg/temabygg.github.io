@@ -400,129 +400,129 @@ function search_kuy() {
     }
 }
 
-async function get_statistics() {
-    let sel = document.getElementById("group")
+function get_group_statistics() {
+    let sel = document.getElementById("stat_group")
     let group = sel.value;
 
-    let start = document.getElementById("start");
-    let from = start.value;
+    getgroupstat(group).then(function (reply) {
 
-    let end = document.getElementById("end");
-    let to = end.value;
+        fill_result(reply);
 
-    try {
-        reply = await (await fetch(`/get/${group}/${from}/${to}`, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        })).json();
-        console.log(reply);
+    });
 
-        let HTML = '';
-        HTML += `<h2>${group}</h2> <h3>${from} - ${to}</h3><table style="border-collapse: separate;
-;empty-cells: hide;">`
+}
 
-        const mp = new Map(reply.map(o => [o.teknik, { ...o, count: 0 }]));
-        for (const { teknik } of reply) mp.get(teknik).count++;
-        let result = Array.from(mp.values());
+function fill_result(reply) {
 
-        result.sort((a, b) => (a.color < b.color) ? 1 : ((b.color < a.color) ? -1 : 0))
+    let HTML = `<table style="border-collapse: separate;empty-cells: hide;">`;
 
-        console.log(result);
+    let orange = true
+    let green = true
+    let blue = true
+    let brown = true
+    let yellowwhite = true
+    let whiteorange = true
+    let orangewhite = true
+    let whitegreen = true
+    let greenwhite = true
 
-        let orange = true
-        let green = true
-        let blue = true
-        let brown = true
-        let yellowwhite = true
-        let whiteorange = true
-        let orangewhite = true
-        let whitegreen = true
-        let greenwhite = true
+    const mp = new Map(reply.map(o => [o.teknik, { ...o, count: 0 }]));
+    for (const { teknik } of reply) mp.get(teknik).count++;
+    let result = Array.from(mp.values());
 
-        result.forEach(element => {
+    result.sort((a, b) => (a.color < b.color) ? 1 : ((b.color < a.color) ? -1 : 0))
 
-            HTML += '<tr>';
+    result.forEach(element => {
 
-            if (element.grupp == "V2" || element.grupp == "V1" || element.grupp == "S1") {
+        HTML += '<tr>';
 
-                if (element.color == 'yellow') {
-                    HTML += '<td style="width: 20px;background-color: rgb(237, 240, 96);color: rgb(237, 240, 96);border: 1px solid #24292e38;">.</td>'
-                } else if (element.color == 'orange') {
-                    if (orange) {
-                        HTML += '<tr><td></td><td></td><td></td></tr>'
-                        orange = false;
-                    }
-                    HTML += '<td style="width: 20px;background-color: rgb(240, 128, 60);color: rgb(240, 128, 60);border: 1px solid #24292e38;">.</td>'
-                } else if (element.color == 'green') {
-                    if (green) {
-                        HTML += '<tr><td></td><td></td><td></td></tr>'
-                        green = false;
-                    }
-                    HTML += '<td style="width: 20px;background-color: rgb(81, 152, 114);color: rgb(81, 152, 114);border: 1px solid #24292e38;">.</td>'
-                } else if (element.color == 'blue') {
-                    if (blue) {
-                        HTML += '<tr><td></td><td></td><td></td></tr>'
-                        blue = false;
-                    }
-                    HTML += '<td style="width: 20px;background-color: rgb(52, 89, 149);color: rgb(52, 89, 149);border: 1px solid #24292e38;">.</td>'
-                } else if (element.color == 'brown') {
-                    if (brown) {
-                        HTML += '<tr><td></td><td></td><td></td></tr>'
-                        brown = false;
-                    }
-                    HTML += '<td style="width: 20px;background-color: rgb(72, 39, 40);color: rgb(72, 39, 40);border: 1px solid #24292e38;">.</td>'
+        if (element.group == "V2" || element.group == "V1" || element.group == "S1") {
+
+            if (element.color == 'yellow') {
+                HTML += '<td style="background-color: rgb(237, 240, 96);color: rgb(237, 240, 96);border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'orange') {
+                if (orange) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    orange = false;
                 }
-
-            } else {
-
-                if (element.color == 'yellowwhite') {
-                    HTML += '<td style="width: 20px;background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #EDF060 8px, #EDF060 28px);color: #EDF060;border: 1px solid #24292e38;">.</td>'
-                } else if (element.color == 'yellow') {
-                    if (yellowwhite) {
-                        HTML += '<tr><td></td><td></td><td></td></tr>'
-                        yellowwhite = false;
-                    }
-                    HTML += '<td style="width: 20px;background: repeating-linear-gradient( 180deg, #EDF060, #EDF060 14px, #FFffff 8px, #FFffff 28px);color: #ffffff;border: 1px solid #24292e38;">.</td>'
-                } else if (element.color == 'orangewhite') {
-                    if (whiteorange) {
-                        HTML += '<tr><td></td><td></td><td></td></tr>'
-                        whiteorange = false;
-                    }
-                    HTML += '<td style="width: 20px;background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #F0803C 8px, #F0803C 28px);color: #f0803c;border: 1px solid #24292e38;">.</td>'
-                } else if (element.color == 'orange') {
-                    if (orangewhite) {
-                        HTML += '<tr><td></td><td></td><td></td></tr>'
-                        orangewhite = false;
-                    }
-                    HTML += '<td style="width: 20px;background: repeating-linear-gradient( 180deg, #F0803C, #F0803C 14px, #FFffff 8px, #FFffff 28px);color: #ffffff;border: 1px solid #24292e38;">.</td>'
-                } else if (element.color == 'greenwhite') {
-                    if (whitegreen) {
-                        HTML += '<tr><td></td><td></td><td></td></tr>'
-                        whitegreen = false;
-                    }
-                    HTML += '<td style="width: 20px;background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #519872 8px, #519872 28px);color: #519872;border: 1px solid #24292e38;">.</td>'
-                } else if (element.color == 'green') {
-                    if (greenwhite) {
-                        HTML += '<tr><td></td><td></td><td></td></tr>'
-                        greenwhite = false;
-                    }
-                    HTML += '<td style="width: 20px;background: repeating-linear-gradient( 180deg, #519872, #519872 14px, #FFffff 8px, #FFffff 28px);color: #ffffff; border: 1px solid #24292e38;">.</td>'
+                HTML += '<td style="background-color: rgb(240, 128, 60);color: rgb(240, 128, 60);border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'green') {
+                if (green) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    green = false;
                 }
-
+                HTML += '<td style="background-color: rgb(81, 152, 114);color: rgb(81, 152, 114);border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'blue') {
+                if (blue) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    blue = false;
+                }
+                HTML += '<td style="background-color: rgb(52, 89, 149);color: rgb(52, 89, 149);border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'brown') {
+                if (brown) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    brown = false;
+                }
+                HTML += '<td style="background-color: rgb(72, 39, 40);color: rgb(72, 39, 40);border: 1px solid #24292e38;">.</td>'
             }
-            HTML += `<td>${element.teknik}</td><td>${element.count}</td></tr>`
-        });
 
-        HTML += '</table>'
+        } else {
 
+            if (element.color == 'yellowwhite') {
+                HTML += '<td style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #EDF060 8px, #EDF060 28px);color: #EDF060;border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'yellow') {
+                if (yellowwhite) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    yellowwhite = false;
+                }
+                HTML += '<td style="background: repeating-linear-gradient( 180deg, #EDF060, #EDF060 14px, #FFffff 8px, #FFffff 28px);color: #ffffff;border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'orangewhite') {
+                if (whiteorange) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    whiteorange = false;
+                }
+                HTML += '<td style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #F0803C 8px, #F0803C 28px);color: #f0803c;border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'orange') {
+                if (orangewhite) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    orangewhite = false;
+                }
+                HTML += '<td style="background: repeating-linear-gradient( 180deg, #F0803C, #F0803C 14px, #FFffff 8px, #FFffff 28px);color: #ffffff;border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'greenwhite') {
+                if (whitegreen) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    whitegreen = false;
+                }
+                HTML += '<td style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #519872 8px, #519872 28px);color: #519872;border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'green') {
+                if (greenwhite) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    greenwhite = false;
+                }
+                HTML += '<td id="td" style="background: repeating-linear-gradient( 180deg, #519872, #519872 14px, #FFffff 8px, #FFffff 28px);color: #ffffff; border: 1px solid #24292e38;">.</td>'
+            }
 
-        console.log(HTML);
+        }
+        HTML += `<td style="width:50vw;"> ${element.teknik}</td><td style="width:42px;"> ${element.count}</td></tr> `
+    });
 
-        let results = document.getElementById("results");
-        results.innerHTML = HTML;
+    HTML += '</table>'
 
-    } catch (ignore) {
-        return ignore.status(400).json({ success: false, errors: errors.array() });
-    }
+    console.log(HTML);
+
+    let results_p = document.getElementById("results");
+    results_p.innerHTML = HTML;
+}
+
+function find_pass() {
+
+    let start = document.getElementById("date");
+    let date = start.value;
+
+    getpass(date).then(function (reply) {
+
+        fill_result(reply);
+
+    });
 
 }

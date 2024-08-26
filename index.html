@@ -54,14 +54,14 @@
 
     <script type="module">
 
-        import { doc, collection, addDoc, getFirestore } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
+        import { doc, collection, query, where, addDoc, getDocs, getFirestore } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
 
         async function savepass(teknik, group, color) {
-            console.log('here');
             const app = window.app;
             const db = getFirestore(app);
 
-            let date = Date.now();
+            let date = new Date();
+            date = date.toISOString().split('T')[0];
 
             await addDoc(collection(db, "pass"), {
                 teknik: teknik,
@@ -73,6 +73,44 @@
         }
 
         window.savepass = savepass;
+
+        async function getgroupstat(group) {
+            const app = window.app;
+            const db = getFirestore(app);
+
+            const q = query(collection(db, "pass"), where("group", "==", `${group}`))
+
+            let result = [];
+
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                result.push(doc.data());
+            });
+
+            return result
+        }
+
+        window.getgroupstat = getgroupstat;
+
+        async function getpass(date) {
+            const app = window.app;
+            const db = getFirestore(app);
+
+            const q = query(collection(db, "pass"), where("date", "==", `${date}`))
+
+            let result = [];
+
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                result.push(doc.data());
+            });
+
+            return result
+        }
+
+        window.getpass = getpass;
     </script>
 </body>
 
