@@ -3,6 +3,7 @@ function setDate() {
 }
 
 function listen_click() {
+
     let tds = document.querySelectorAll(`td`);
     tds.forEach((td) => {
         td.addEventListener(`click`, function () {
@@ -30,6 +31,58 @@ function listen_click() {
     });
 }
 
+
+function listen_click_plan() {
+
+    let trs = document.querySelectorAll(`tr`);
+    trs.forEach((tr) => {
+        tr.addEventListener(`click`, function () {
+
+            if (tr.children[1].classList[0] != undefined) {
+
+
+                tr.children[3].classList.toggle("chosen");
+
+                if (tr.children[1].classList[0] == "yellowwhite") {
+                    tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(253, 255, 133)' ? 'rgb(255, 255, 255)' : 'rgb(253, 255, 133)';
+                }
+
+                if (tr.children[1].classList[0] == "yellow") {
+                    tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(251, 255, 10)' ? 'rgb(255, 255, 255)' : 'rgb(251, 255, 10)';
+                }
+
+                if (tr.children[1].classList[0] == "orangewhite") {
+                    tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(245, 169, 122)' ? 'rgb(255, 255, 255)' : 'rgb(245, 169, 122)';
+                }
+
+                if (tr.children[1].classList[0] == "orange") {
+                    tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(228, 98, 17)' ? 'rgb(255, 255, 255)' : 'rgb(228, 98, 17)';
+                }
+
+                if (tr.children[1].classList[0] == "greenwhite") {
+                    tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(162, 205, 183)' ? 'rgb(255, 255, 255)' : 'rgb(162, 205, 183)';
+                }
+
+                if (tr.children[1].classList[0] == "green") {
+                    tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(64, 119, 90)' ? 'rgb(255, 255, 255)' : 'rgb(64, 119, 90)';
+                }
+
+                if (tr.children[1].classList[0] == "blue") {
+                    tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(52, 89, 149)' ? 'rgb(255, 255, 255)' : 'rgb(52, 89, 149)';
+                }
+                if (tr.children[1].classList[0] == "brown") {
+                    tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(72, 39, 40)' ? 'rgb(255, 255, 255)' : 'rgb(72, 39, 40)';
+                }
+
+                if (tr.children[1].classList[0] == "all") {
+                    tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(212, 116, 190)' ? 'rgb(255, 255, 255)' : 'rgb(212, 116, 190)';
+                }
+
+            }
+            ;
+        });
+    });
+}
 
 function createFile_mon() {
     let elements = document.getElementsByClassName('chosen');
@@ -443,6 +496,38 @@ function get_group_statistics() {
 
 }
 
+function get_group_statistics_plan() {
+    let sel = document.getElementById("stat_group_plan")
+    let group = sel.value;
+
+    getgroupstat(group).then(function (reply) {
+
+
+        const mp = new Map(reply.map(o => [o.teknik, { ...o, count: 0 }]));
+        for (const { teknik } of reply) mp.get(teknik).count++;
+        let result = Array.from(mp.values());
+
+        console.log(result);
+
+
+        let trs = document.querySelectorAll(`tr`);
+
+        for (let index = 0; index < result.length; index++) {
+            const element = result[index];
+            for (let index = 0; index < trs.length; index++) {
+                const tr = trs[index];
+                console.log(tr.children[1]);
+
+                if (tr.children[1].innerHTML.replace(/\s/g, "") == element.teknik.replace(/\s/g, "")) {
+                    tr.children[2].innerHTML = element.count;
+
+                }
+            }
+
+        }
+    });
+}
+
 function fill_result(reply, pass_count) {
 
     let HTML = `<table style="border-collapse: separate;empty-cells: hide;">`;
@@ -546,8 +631,6 @@ function fill_result(reply, pass_count) {
 
     HTML += '</table>'
 
-    console.log(HTML);
-
     let results_p = document.getElementById("results");
     results_p.innerHTML = HTML;
 }
@@ -565,5 +648,340 @@ function find_pass() {
         fill_result(reply, false);
 
     });
+
+}
+
+function createFile_mon() {
+    let elements = document.getElementsByClassName('chosen');
+    let chosen = [];
+
+    let facit = {};
+    facit['tab'] = "Tsuri ashi bakåt";
+    facit['taf'] = "Tsuri ashi bakåt";
+    facit['tlv'] = "Taisabaki lång vänster";
+    facit['k'] = "Kawashi";
+    facit['tkv'] = "Taisabaki kort vänster";
+    facit['m'] = "Maesabaki";
+    facit['jcu'] = "Jodan chikai uke";
+    facit['ub'] = "Uppgång bakåt";
+    facit['tlh'] = "Taisabaki lång höger";
+    facit['aa'] = "Ayumi ashi (samma kamae)"
+
+
+    for (let index = 0; index < elements.length; index++) {
+        chosen.push({ "class": elements[index].classList[0], "name": elements[index].innerText });
+    }
+
+    chosen.sort((a, b) => (a.class < b.class) ? 1 : ((b.class < a.class) ? -1 : 0))
+
+    let warmup = [];
+    for (let index = 0; index < elements.length; index++) {
+        let classlist = elements[index].classList;
+        classlist.forEach(element => {
+            if (facit.hasOwnProperty(element)) {
+                if (!warmup.includes(facit[element])) {
+                    warmup.push(facit[element]);
+                }
+            }
+        });
+    }
+
+    let content = "";
+    let statistics = "";
+    let colors = [];
+    let date = document.getElementById("mon_date");
+    date = date.value;
+    content += "6:e mon (vit-gult): \n";
+
+    let yellow = true;
+    let orangewhite = true;
+    let orange = true;
+    let greenwhite = true;
+    let green = true;
+
+    for (let index = 0; index < chosen.length; index++) {
+
+        if (chosen[index].class == "yellow" && yellow) {
+            content += "\n5e mon (gul-vitt): \n";
+            yellow = false;
+        }
+
+        if (chosen[index].class == "orangewhite" && orangewhite) {
+            content += "\n4e mon: (vit-orange): \n";
+            orangewhite = false;
+        }
+
+        if (chosen[index].class == "orange" && orange) {
+            content += "\n3:e mon (orange-vitt): \n";
+            orange = false;
+        }
+
+        if (chosen[index].class == "greenwhite" && greenwhite) {
+            content += "\n2:a mon (vit-grön): \n";
+            greenwhite = false;
+        }
+
+        if (chosen[index].class == "green" && green) {
+            content += "\n2:a mon (grön-vitt): \n";
+            green = false;
+        }
+
+        content += "" + chosen[index].name + "\n";
+        statistics += "" + chosen[index].name + "\n";
+        colors.push(chosen[index].class);
+    }
+
+    let tekniker = statistics.split('\n');
+
+    let sel = document.getElementById("group")
+    let group = sel.value;
+
+    if (group == "") {
+        let info = document.getElementById("info");
+        info.innerHTML = 'Du behöver välja vilken grupp du vill skapa passet för, om du vill spara statistiken.'
+
+        setTimeout(function () { info.innerHTML = ""; }, 5000);
+    }
+
+
+    let i = 0;
+
+    tekniker.forEach(element => {
+        if (element != "") {
+            savepass(element, group, colors[i])
+            i++;
+        }
+    });
+
+    content += "\n\nFörslag på uppvärmningar:\n";
+
+    warmup.forEach(element => {
+        content += element + "\n"
+    });
+
+    let file = new File(["\ufeff" + content], `${group}_${date}.txt`, { type: "text/plain:charset=UTF-8" });
+
+    url = window.URL.createObjectURL(file);
+
+    let a = document.createElement("a");
+    a.style = "display: none";
+    a.href = url;
+    a.download = file.name;
+    a.click();
+    window.URL.revokeObjectURL(url);
+}
+
+function search_mon() {
+    clear_all();
+    let input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("search_field");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("table");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                td.click();
+            } else {
+                td.style.color = "white";
+
+            }
+        }
+
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                td.click();
+            } else {
+                td.style.color = "white";
+
+            }
+        }
+
+        td = tr[i].getElementsByTagName("td")[2];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                td.click();
+            } else {
+                td.style.color = "white";
+
+            }
+        }
+
+        td = tr[i].getElementsByTagName("td")[3];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                td.click();
+            } else {
+                td.style.color = "white";
+
+            }
+        }
+
+        td = tr[i].getElementsByTagName("td")[4];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                td.click();
+            } else {
+                td.style.color = "white";
+
+            }
+        }
+
+        td = tr[i].getElementsByTagName("td")[5];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                td.click();
+            } else {
+                td.style.color = "white";
+
+            }
+        }
+    }
+}
+
+function clear_all() {
+    let tds = document.getElementsByTagName('td');
+    console.log(tds);
+    for (let td of tds) {
+        td?.classList.remove('chosen');
+
+        if (td.innerHTML != "") {
+            td.style.color = "black";
+            td.style.backgroundColor = 'rgb(255, 255, 255)';
+        }
+    }
+}
+
+function clear_all_plan() {
+    let tds = document.getElementsByTagName('td');
+    console.log(tds);
+    for (let td of tds) {
+
+        if (td.classList[0] == 'chosen') {
+            td.classList.remove('chosen');
+            td.style.backgroundColor = 'rgb(255, 255, 255)';
+        }
+
+
+    }
+}
+
+
+
+function clear_search() {
+    let input = document.getElementById("search_field");
+    input.value = "";
+    clear_all()
+}
+
+function saveplan_mon() {
+
+
+    let elements = [];
+
+    let trs = document.querySelectorAll(`tr`);
+    trs.forEach(element => {
+        if (element.children[3].classList[0] == "chosen") {
+            elements.push(element.children[1])
+        }
+    });
+
+    let chosen = [];
+
+
+    for (let index = 0; index < elements.length; index++) {
+        chosen.push({ "class": elements[index].classList[0], "name": elements[index].innerText });
+    }
+
+    chosen.sort((a, b) => (a.class < b.class) ? 1 : ((b.class < a.class) ? -1 : 0))
+
+    console.log(chosen);
+
+    let content = "";
+    let statistics = "";
+    let colors = [];
+    let date = document.getElementById("mon_plan_date");
+    date = date.value;
+    content += "6:e mon (vit-gult): \n";
+
+    let yellow = true;
+    let orangewhite = true;
+    let orange = true;
+    let greenwhite = true;
+    let green = true;
+
+    for (let index = 0; index < chosen.length; index++) {
+
+        if (chosen[index].class == "yellow" && yellow) {
+            content += "\n5e mon (gul-vitt): \n";
+            yellow = false;
+        }
+
+        if (chosen[index].class == "orangewhite" && orangewhite) {
+            content += "\n4e mon: (vit-orange): \n";
+            orangewhite = false;
+        }
+
+        if (chosen[index].class == "orange" && orange) {
+            content += "\n3:e mon (orange-vitt): \n";
+            orange = false;
+        }
+
+        if (chosen[index].class == "greenwhite" && greenwhite) {
+            content += "\n2:a mon (vit-grön): \n";
+            greenwhite = false;
+        }
+
+        if (chosen[index].class == "green" && green) {
+            content += "\n2:a mon (grön-vitt): \n";
+            green = false;
+        }
+
+        content += "" + chosen[index].name + "\n";
+        statistics += "" + chosen[index].name + "\n";
+        colors.push(chosen[index].class);
+    }
+
+    let tekniker = statistics.split('\n');
+
+    let sel = document.getElementById("stat_group_plan")
+    let group = sel.value;
+
+    if (group == "") {
+        let info = document.getElementById("info");
+        info.innerHTML = 'Du behöver välja vilken grupp du vill skapa passet för, om du vill spara statistiken.'
+
+        setTimeout(function () { info.innerHTML = ""; }, 5000);
+    }
+
+    let i = 0;
+
+    tekniker.forEach(element => {
+        if (element != "") {
+            savepass(element, group, colors[i])
+            i++;
+        }
+    });
+
+
+    let file = new File(["\ufeff" + content], `${group}_${date}.txt`, { type: "text/plain:charset=UTF-8" });
+
+    url = window.URL.createObjectURL(file);
+
+    let a = document.createElement("a");
+    a.style = "display: none";
+    a.href = url;
+    a.download = file.name;
+    a.click();
+    window.URL.revokeObjectURL(url);
 
 }

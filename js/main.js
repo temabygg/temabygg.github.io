@@ -43,9 +43,14 @@ async function router() {
     document.querySelector('main').innerHTML = content;
     route === '/partials/mon.html' && listen_click();
     route === '/partials/kuy.html' && listen_click();
+    route === '/partials/plan-mon.html' && listen_click_plan();
+    route === '/partials/plan-kuy.html' && listen_click_plan();
     route === '/partials/mon.html' && setDate();
     route === '/partials/kuy.html' && setDate();
     route === '/partials/statistics.html' && setDate();
+    route === '/partials/plan-mon.html' && setDate();
+    route === '/partials/plan-kuy.html' && setDate();
+
 
 
 }

@@ -291,7 +291,7 @@ h3 {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    width: 70%;
+    width: 80%;
     padding-top: 20px;
 }
 
@@ -341,4 +341,78 @@ label {
 
 .thisdate {
     height: 34px;
+}
+
+
+#plan_table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-top: 20px;
+}
+
+#plan_table td {
+    border: 1px solid #24292E;
+    width: 11%;
+}
+
+#plan_table th {
+    width: 11%;
+}
+
+#plan_table tr th:nth-child(2),
+#plan_table tr td:nth-child(2) {
+    width: 60%;
+}
+
+#plan_table tr {
+    display: table;
+}
+
+#plan_table tr td:first-child,
+#plan_table tr th:first-child {
+    width: 5%;
+}
+
+#plan_table tr td:nth-child(3), #plan_table tr td:nth-child(4) {
+    text-align: center;
+}
+
+#stat_group_plan, #save_plan {
+    margin-top: 30px;
+}
+
+#get_group_button {
+    margin-top: 30px;
+}
+
+#mon_plan_date {
+    height: 35px;
+}
+
+#dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#dropdown-content {
+    padding-top: 10px;
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+#dropy {
+    cursor: pointer;
+}
+
+#dropdown-content a {
+    cursor: pointer;
+    padding: 15px 10px 0 0;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+}
+
+#dropdown:hover #dropdown-content {
+    display: block;
 }
