@@ -47,7 +47,7 @@ async function router() {
     route === '/partials/plan-kuy.html' && listen_click_plan();
     route === '/partials/mon.html' && setDate();
     route === '/partials/kuy.html' && setDate();
-    route === '/partials/statistics.html' && setDate();
+    route === '/partials/old-pass.html' && setDate();
     route === '/partials/plan-mon.html' && setDate();
     route === '/partials/plan-kuy.html' && setDate();
 

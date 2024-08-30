@@ -23,6 +23,35 @@ main {
     align-items: center;
 }
 
+#text {
+    height: 260px;
+    width: 260px;
+    position: relative;
+    animation: effect 18s linear infinite;
+    padding: 0;
+}
+
+@keyframes effect {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+span {
+    position: absolute;
+    left: 50%;
+    transform-origin: 0px 130px;
+    transform-style: flat;
+    font-family: 'Raleway';
+    font-weight: 600;
+    font-size: 21pt;
+    color: rgb(204, 51, 51);
+}
+
 nav {
     width: 100%;
     display: flex;
@@ -37,6 +66,11 @@ nav a {
     font-size: 20px;
     font-weight: 650;
     font-family: Raleway;
+}
+
+nav img {
+    height: 80px;
+    padding: 0;
 }
 
 .active {
@@ -183,7 +217,7 @@ img {
 }
 
 #title {
-    padding-top: 6%;
+    padding-bottom: 50px;
     font-weight: 500;
     font-size: 3.2rem;
     font-family: Raleway
@@ -304,6 +338,7 @@ h3 {
     justify-content: center;
 }
 
+
 label {
     font-size: 10pt;
 }
@@ -317,7 +352,6 @@ label {
 }
 
 .stat_title {
-    padding-top: 50px;
     font-size: 14pt;
     font-family: Raleway;
 }
@@ -327,11 +361,6 @@ label {
 #stat_pass_group,
 #statistics_pass_button {
     margin-top: 15px;
-}
-
-#pass_stat_tit {
-    border-top: 2px solid rgb(204, 51, 51);
-    margin-top: 50px;
 }
 
 #stat_pass_group,
@@ -373,11 +402,13 @@ label {
     width: 5%;
 }
 
-#plan_table tr td:nth-child(3), #plan_table tr td:nth-child(4) {
+#plan_table tr td:nth-child(3),
+#plan_table tr td:nth-child(4) {
     text-align: center;
 }
 
-#stat_group_plan, #save_plan {
+#stat_group_plan,
+#save_plan {
     margin-top: 30px;
 }
 
@@ -415,4 +446,8 @@ label {
 
 #dropdown:hover #dropdown-content {
     display: block;
+}
+
+#table .all {
+    text-align: center;
 }

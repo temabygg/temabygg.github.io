@@ -36,12 +36,14 @@
 <body>
     <header>
         <nav>
+
+            <img src="./resources/logo.png" alt="logo">
             <a class="navigation active" href="/">START</a>
             <div id="dropdown">
                 <a id="dropy">MON</a>
                 <div id="dropdown-content">
                     <a class="navigation" href="/plan-mon"">VERTIKALT</a>
-                    <a class="navigation" href="/mon">HORISONTELLT</a>
+                    <a class=" navigation" href="/mon">HORISONTELLT</a>
                 </div>
             </div>
 
@@ -52,7 +54,13 @@
                     <a class=" navigation" href="/kuy">HORISONTELLT</a>
                 </div>
             </div>
-            <a class="navigation" href="/statistics">STATISTIK</a>
+            <div id="dropdown">
+                <a id="dropy">STATISTIK</a>
+                <div id="dropdown-content">
+                    <a class="navigation" href="/statistics"">GRUPPSTATISTIK</a>
+                    <a class=" navigation" href="/old-pass">TIDIGARE PASS</a>
+                </div>
+            </div>
 
         </nav>
     </header>
@@ -124,6 +132,19 @@
         }
 
         window.getpass = getpass;
+
+
+        const str = "MALMÖ  JU-JUTSUKLUBB";
+        const text = document.getElementById("text");
+        window.onload = function () {
+            for (let i = 0; i < str.length; i++) {
+                let span = document.createElement('span');
+                span.innerHTML = str[i]
+                text.appendChild(span);
+                console.log(str[i])
+                span.style.transform = `rotate(${15 * i - 30}deg)`;
+            }
+        }
     </script>
 </body>
 

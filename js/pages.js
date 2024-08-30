@@ -25,6 +25,10 @@ function listen_click() {
                 if (td.classList[0].startsWith("br")) {
                     td.style.backgroundColor = td.style.backgroundColor === 'rgba(72, 39, 40, 0.7)' ? 'rgba(255, 255, 255, 1)' : 'rgba(72, 39, 40, 0.7)';
                 }
+                if (td.classList[0].startsWith("al")) {
+                    td.style.backgroundColor = td.style.backgroundColor === 'rgba(212, 116, 190, 0.7)' ? 'rgba(255, 255, 255, 1)' : 'rgba(212, 116, 190, 0.7)';
+                }
+
 
             };
         });
@@ -294,12 +298,6 @@ function clear_all() {
     }
 }
 
-function clear_search() {
-    let input = document.getElementById("search_field");
-    input.value = "";
-    clear_all()
-}
-
 function createFile_kuy() {
 
     let elements = document.getElementsByClassName('chosen');
@@ -484,48 +482,89 @@ function search_kuy() {
     }
 }
 
+function search_kuy_plan() {
+    clear_all_plan();
+
+    let input, filter, tr, td, i, txtValue;
+    input = document.getElementById("search_field");
+    filter = input.value.toUpperCase();
+    let trs = document.getElementsByTagName("tr");
+
+
+    for (i = 0; i < trs.length; i++) {
+        td = trs[i].children[1];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                trs[i].children[3].click();
+            } else {
+                trs[i].style.display = "none";
+            }
+        }
+    }
+
+    let search = document.getElementById("search_field");
+    search.value = "";
+
+}
+
 function get_group_statistics() {
     let sel = document.getElementById("stat_group")
     let group = sel.value;
 
-    getgroupstat(group).then(function (reply) {
+    if (group == "") {
+        let info = document.getElementById("info");
+        info.innerHTML = 'Du behöver välja grupp om du vill hämta statistiken.'
 
-        fill_result(reply, true);
+        setTimeout(function () { info.innerHTML = ""; }, 5000);
+    } else {
 
-    });
+        getgroupstat(group).then(function (reply) {
+
+            fill_result(reply, true);
+
+        });
+    }
 
 }
 
 function get_group_statistics_plan() {
     let sel = document.getElementById("stat_group_plan")
     let group = sel.value;
+    if (group == "") {
+        let info = document.getElementById("info");
+        info.innerHTML = 'Du behöver välja vilken grupp du vill skapa passet för, om du vill spara statistiken.'
 
-    getgroupstat(group).then(function (reply) {
+        setTimeout(function () { info.innerHTML = ""; }, 5000);
+    } else {
+
+        getgroupstat(group).then(function (reply) {
 
 
-        const mp = new Map(reply.map(o => [o.teknik, { ...o, count: 0 }]));
-        for (const { teknik } of reply) mp.get(teknik).count++;
-        let result = Array.from(mp.values());
+            const mp = new Map(reply.map(o => [o.teknik, { ...o, count: 0 }]));
+            for (const { teknik } of reply) mp.get(teknik).count++;
+            let result = Array.from(mp.values());
 
-        console.log(result);
+            console.log(result);
 
 
-        let trs = document.querySelectorAll(`tr`);
+            let trs = document.querySelectorAll(`tr`);
 
-        for (let index = 0; index < result.length; index++) {
-            const element = result[index];
-            for (let index = 0; index < trs.length; index++) {
-                const tr = trs[index];
-                console.log(tr.children[1]);
+            for (let index = 0; index < result.length; index++) {
+                const element = result[index];
+                for (let index = 0; index < trs.length; index++) {
+                    const tr = trs[index];
+                    console.log(tr.children[1]);
 
-                if (tr.children[1].innerHTML.replace(/\s/g, "") == element.teknik.replace(/\s/g, "")) {
-                    tr.children[2].innerHTML = element.count;
+                    if (tr.children[1].innerHTML.replace(/\s/g, "") == element.teknik.replace(/\s/g, "")) {
+                        tr.children[2].innerHTML = element.count;
 
+                    }
                 }
-            }
 
-        }
-    });
+            }
+        });
+    }
 }
 
 function fill_result(reply, pass_count) {
@@ -555,19 +594,19 @@ function fill_result(reply, pass_count) {
         if (element.group == "V2" || element.group == "V1" || element.group == "S1") {
 
             if (element.color == 'yellow') {
-                HTML += '<td style="background-color: rgb(237, 240, 96);color: rgb(237, 240, 96);border: 1px solid #24292e38;">.</td>'
+                HTML += '<td style="background-color: rgb(255, 235, 10);color: rgb(255, 235, 10);border: 1px solid #24292e38;">.</td>'
             } else if (element.color == 'orange') {
                 if (orange) {
                     HTML += '<tr><td></td><td></td><td></td></tr>'
                     orange = false;
                 }
-                HTML += '<td style="background-color: rgb(240, 128, 60);color: rgb(240, 128, 60);border: 1px solid #24292e38;">.</td>'
+                HTML += '<td style="background-color: rgb(253, 117, 33);color: rgb(253, 117, 33);border: 1px solid #24292e38;">.</td>'
             } else if (element.color == 'green') {
                 if (green) {
                     HTML += '<tr><td></td><td></td><td></td></tr>'
                     green = false;
                 }
-                HTML += '<td style="background-color: rgb(81, 152, 114);color: rgb(81, 152, 114);border: 1px solid #24292e38;">.</td>'
+                HTML += '<td style="background-color: rgb(64, 119, 90);color: rgb(64, 119, 90);border: 1px solid #24292e38;">.</td>'
             } else if (element.color == 'blue') {
                 if (blue) {
                     HTML += '<tr><td></td><td></td><td></td></tr>'
@@ -585,37 +624,37 @@ function fill_result(reply, pass_count) {
         } else {
 
             if (element.color == 'yellowwhite') {
-                HTML += '<td style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #EDF060 8px, #EDF060 28px);color: #EDF060;border: 1px solid #24292e38;">.</td>'
+                HTML += '<td style="background-color: #FFF370; color: #FFF370; border: 1px solid #24292e38;">.</td>'
             } else if (element.color == 'yellow') {
                 if (yellowwhite) {
                     HTML += '<tr><td></td><td></td><td></td></tr>'
                     yellowwhite = false;
                 }
-                HTML += '<td style="background: repeating-linear-gradient( 180deg, #EDF060, #EDF060 14px, #FFffff 8px, #FFffff 28px);color: #ffffff;border: 1px solid #24292e38;">.</td>'
+                HTML += '<td style="background-color: #FFEB0A;color: #FFEB0A;border: 1px solid #24292e38;">.</td>'
             } else if (element.color == 'orangewhite') {
                 if (whiteorange) {
                     HTML += '<tr><td></td><td></td><td></td></tr>'
                     whiteorange = false;
                 }
-                HTML += '<td style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #F0803C 8px, #F0803C 28px);color: #f0803c;border: 1px solid #24292e38;">.</td>'
+                HTML += '<td style="background-color: #FEB486;color: #FEB486;border: 1px solid #24292e38;">.</td>'
             } else if (element.color == 'orange') {
                 if (orangewhite) {
                     HTML += '<tr><td></td><td></td><td></td></tr>'
                     orangewhite = false;
                 }
-                HTML += '<td style="background: repeating-linear-gradient( 180deg, #F0803C, #F0803C 14px, #FFffff 8px, #FFffff 28px);color: #ffffff;border: 1px solid #24292e38;">.</td>'
+                HTML += '<td style="background-color: #FD7521 ;color: #FD7521;border: 1px solid #24292e38;">.</td>'
             } else if (element.color == 'greenwhite') {
                 if (whitegreen) {
                     HTML += '<tr><td></td><td></td><td></td></tr>'
                     whitegreen = false;
                 }
-                HTML += '<td style="background: repeating-linear-gradient( 180deg, #ffffff, #ffffff 14px, #519872 8px, #519872 28px);color: #519872;border: 1px solid #24292e38;">.</td>'
+                HTML += '<td style="background-color: #A2CDB7;color: #A2CDB7;border: 1px solid #24292e38;">.</td>'
             } else if (element.color == 'green') {
                 if (greenwhite) {
                     HTML += '<tr><td></td><td></td><td></td></tr>'
                     greenwhite = false;
                 }
-                HTML += '<td id="td" style="background: repeating-linear-gradient( 180deg, #519872, #519872 14px, #FFffff 8px, #FFffff 28px);color: #ffffff; border: 1px solid #24292e38;">.</td>'
+                HTML += '<td id="td" style="background-color: #40775A;color: #40775A; border: 1px solid #24292e38;">.</td>'
             }
 
         }
@@ -640,14 +679,23 @@ function find_pass() {
     let start = document.getElementById("stat_pass_date");
     let date = start.value;
 
+
     let gr = document.getElementById("stat_pass_group");
     let group = gr.value;
 
-    getpass(date, group).then(function (reply) {
+    if (group == "") {
+        let info = document.getElementById("info");
+        info.innerHTML = 'Du behöver välja grupp om du vill hämta statistiken.'
 
-        fill_result(reply, false);
+        setTimeout(function () { info.innerHTML = ""; }, 5000);
+    } else {
 
-    });
+        getpass(date, group).then(function (reply) {
+
+            fill_result(reply, false);
+
+        });
+    }
 
 }
 
@@ -862,16 +910,20 @@ function clear_all() {
 }
 
 function clear_all_plan() {
+
     let tds = document.getElementsByTagName('td');
-    console.log(tds);
     for (let td of tds) {
 
         if (td.classList[0] == 'chosen') {
             td.classList.remove('chosen');
             td.style.backgroundColor = 'rgb(255, 255, 255)';
+            td.style.display = "";
         }
+    }
 
-
+    let trs = document.getElementsByTagName('tr');
+    for (let tr of trs) {
+        tr.style.display = "table";
     }
 }
 

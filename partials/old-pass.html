@@ -10,7 +10,7 @@
 </style>
 
 <div class="options">
-    <select class="group" name="group" id="stat_group">
+    <select class="group" name="group" id="stat_pass_group">
         <option value="" selected disabled hidden>Välj grupp</option>
         <option value="M1">M1</option>
         <option value="M2">M2</option>
@@ -23,8 +23,14 @@
         <option value="S1">S1</option>
     </select>
 
-    <button id="statistics_button" onclick="get_group_statistics()">Se statistik</button>
+    <div class="date">
+        <input type="date" class="thisdate" id="stat_pass_date" name="date" value="2024-08-01" min="2024-01-01"
+            max="2030-12-31" />
+    </div>
+
+    <button id="statistics_pass_button" onclick="find_pass()">Visa pass</button>
 </div>
 <p id="info"></p>
+
 
 <div id="results"></div>
