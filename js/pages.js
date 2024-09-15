@@ -105,126 +105,6 @@ function listen_click_old_pass() {
     });
 }
 
-function createFile_mon() {
-    let elements = document.getElementsByClassName('chosen');
-    let chosen = [];
-
-    let facit = {};
-    facit['tab'] = "Tsuri ashi bakåt";
-    facit['taf'] = "Tsuri ashi bakåt";
-    facit['tlv'] = "Taisabaki lång vänster";
-    facit['k'] = "Kawashi";
-    facit['tkv'] = "Taisabaki kort vänster";
-    facit['m'] = "Maesabaki";
-    facit['jcu'] = "Jodan chikai uke";
-    facit['ub'] = "Uppgång bakåt";
-    facit['tlh'] = "Taisabaki lång höger";
-    facit['aa'] = "Ayumi ashi (samma kamae)"
-
-
-    for (let index = 0; index < elements.length; index++) {
-        chosen.push({ "class": elements[index].classList[0], "name": elements[index].innerText });
-    }
-
-    chosen.sort((a, b) => (a.class < b.class) ? 1 : ((b.class < a.class) ? -1 : 0))
-
-    let warmup = [];
-    for (let index = 0; index < elements.length; index++) {
-        let classlist = elements[index].classList;
-        classlist.forEach(element => {
-            if (facit.hasOwnProperty(element)) {
-                if (!warmup.includes(facit[element])) {
-                    warmup.push(facit[element]);
-                }
-            }
-        });
-    }
-
-    let content = "";
-    let statistics = "";
-    let colors = [];
-    let date = document.getElementById("mon_date");
-    date = date.value;
-    content += "6:e mon (vit-gult): \n";
-
-    let yellow = true;
-    let orangewhite = true;
-    let orange = true;
-    let greenwhite = true;
-    let green = true;
-
-    for (let index = 0; index < chosen.length; index++) {
-
-        if (chosen[index].class == "yellow" && yellow) {
-            content += "\n5e mon (gul-vitt): \n";
-            yellow = false;
-        }
-
-        if (chosen[index].class == "orangewhite" && orangewhite) {
-            content += "\n4e mon: (vit-orange): \n";
-            orangewhite = false;
-        }
-
-        if (chosen[index].class == "orange" && orange) {
-            content += "\n3:e mon (orange-vitt): \n";
-            orange = false;
-        }
-
-        if (chosen[index].class == "greenwhite" && greenwhite) {
-            content += "\n2:a mon (vit-grön): \n";
-            greenwhite = false;
-        }
-
-        if (chosen[index].class == "green" && green) {
-            content += "\n2:a mon (grön-vitt): \n";
-            green = false;
-        }
-
-        content += "" + chosen[index].name + "\n";
-        statistics += "" + chosen[index].name + "\n";
-        colors.push(chosen[index].class);
-    }
-
-    let tekniker = statistics.split('\n');
-
-    let sel = document.getElementById("group")
-    let group = sel.value;
-
-    if (group == "") {
-        let info = document.getElementById("info");
-        info.innerHTML = 'Du behöver välja vilken grupp du vill skapa passet för, om du vill spara statistiken.'
-
-        setTimeout(function () { info.innerHTML = ""; }, 5000);
-    }
-
-
-    let i = 0;
-
-    tekniker.forEach(element => {
-        if (element != "") {
-            savepass(element, group, colors[i])
-            i++;
-        }
-    });
-
-    content += "\n\nFörslag på uppvärmningar:\n";
-
-    warmup.forEach(element => {
-        content += element + "\n"
-    });
-
-    let file = new File(["\ufeff" + content], `${group}_${date}.txt`, { type: "text/plain:charset=UTF-8" });
-
-    url = window.URL.createObjectURL(file);
-
-    let a = document.createElement("a");
-    a.style = "display: none";
-    a.href = url;
-    a.download = file.name;
-    a.click();
-    window.URL.revokeObjectURL(url);
-}
-
 function clear_all() {
     let tds = document.getElementsByTagName('td');
     console.log(tds);
@@ -239,6 +119,19 @@ function clear_all() {
 }
 
 function createFile_kuy() {
+
+    let modal = document.getElementsByClassName("modal")[0];
+    let modal_content = document.getElementsByClassName("modal-content")[0];
+
+
+    modal.style.display = "block";
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 
     let elements = document.getElementsByClassName('chosen');
     let chosen = [];
@@ -277,40 +170,60 @@ function createFile_kuy() {
     }
 
     let content = "";
+    let modal_cont = "";
+
     let statistics = "";
     let colors = [];
     let date = document.getElementById("kuy_date");
     date = date.value;
     content += "5:e kuy: \n";
+    modal_cont += '<h2 style="color: rgb(255, 235, 10)">5:e kuy:</h2>';
 
     let orange = true;
     let green = true;
     let blue = true;
     let brown = true;
+    let all = true;
 
     for (let index = 0; index < chosen.length; index++) {
 
         if (chosen[index].class == "orange" && orange) {
             content += "\n4e kuy: \n";
+            modal_cont += '<h2 style="color: rgb(253, 117, 33)">4e kuy:</h2>';
             orange = false;
         }
 
         if (chosen[index].class == "green" && green) {
             content += "\n3:e kuy: \n";
+            modal_cont += '<h2 style="color: rgb(64, 119, 90)">3e kuy:</h2>';
             green = false;
         }
 
         if (chosen[index].class == "blue" && blue) {
             content += "\n2:a kuy: \n";
+            modal_cont += '<h2 style="color: rgb(52, 89, 149)">2a kuy:</h2>';
+
             blue = false;
         }
 
         if (chosen[index].class == "brown" && brown) {
             content += "\n1:a kuy: \n";
+            modal_cont += '<h2 style="color: rgb(72, 39, 40)">1:a kuy:</h2>';
+
             brown = false;
         }
 
+
+        if (chosen[index].class == "all" && all) {
+            content += "\nGrundläggande tekniker: \n";
+            modal_cont += '<h2 style="color: #D474BE">Grundläggande tekniker: </h2>';
+
+            all = false;
+        }
+
         content += "" + chosen[index].name + "\n";
+        modal_cont += "<p>" + chosen[index].name + "</p>";
+
         statistics += "" + chosen[index].name + "\n";
 
         colors.push(chosen[index].class);
@@ -338,23 +251,27 @@ function createFile_kuy() {
     });
 
     content += "\n\nFörslag på uppvärmningar:\n";
+    modal_cont += "<h3>Förslag på uppvärmningar:</h3>"
+
 
     warmup.forEach(element => {
         content += element + "\n"
+        modal_cont += "<p>" + element + "</p>"
+
     });
 
-    let file = new File(["\ufeff" + content], `${group}_${date}.txt`, { type: "text/plain:charset=UTF-8" });
 
-    url = window.URL.createObjectURL(file);
+    modal_content.innerHTML = modal_cont + '<button class="close">Spara pass</button>';
 
-    let a = document.createElement("a");
-    a.style = "display: none";
-    a.href = url;
-    a.download = file.name;
-    a.click();
-    window.URL.revokeObjectURL(url);
+    let span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+        download_file(content, group, date);
+    }
+
 }
-
 
 function search_kuy() {
     clear_all();
@@ -530,6 +447,7 @@ function fill_result(reply, pass_count) {
     let orangewhite = true
     let whitegreen = true
     let greenwhite = true
+    let all = true;
 
     const mp = new Map(reply.map(o => [o.teknik, { ...o, count: 0 }]));
     for (const { teknik } of reply) mp.get(teknik).count++;
@@ -605,6 +523,13 @@ function fill_result(reply, pass_count) {
                     greenwhite = false;
                 }
                 HTML += '<td id="td" style="background-color: #40775A;color: #40775A; border: 1px solid #24292e38;">.</td>'
+            }
+            else if (element.color == 'all') {
+                if (all) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    all = false;
+                }
+                HTML += '<td id="td" style="background-color: #D474BE;color: #D474BE; border: 1px solid #24292e38;">.</td>'
             }
 
         }
@@ -637,6 +562,7 @@ function fill_result_old_pass(reply, pass_count) {
     let orangewhite = true
     let whitegreen = true
     let greenwhite = true
+    let all = true;
 
     const mp = new Map(reply.map(o => [o.teknik, { ...o, count: 0 }]));
     for (const { teknik } of reply) mp.get(teknik).count++;
@@ -714,13 +640,21 @@ function fill_result_old_pass(reply, pass_count) {
                 HTML += '<td id="td" style="background-color: #40775A;color: #40775A; border: 1px solid #24292e38;">.</td>'
             }
 
+            else if (element.color == 'all') {
+                if (all) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    all = false;
+                }
+                HTML += '<td id="td" style="background-color: #D474BE;color: #D474BE; border: 1px solid #24292e38;">.</td>'
+            }
+
         }
 
         if (pass_count) {
-            HTML += `<td style="width:50vw;"> ${element.teknik}</td><td style="width:42px;"> ${element.count}</td></tr> `
+            HTML += `<td style="width:50vw;">${element.teknik}</td><td style="width:42px;"> ${element.count}</td></tr> `
 
         } else {
-            HTML += `<td id=${element.id} style="width:50vw;"> ${element.teknik}</td><td style="width:30px"><input type="checkbox" name="select"></td></tr> `
+            HTML += `<td style="width:50vw;">${element.teknik}</td><td style="width:30px"><input type="checkbox" name="select"></td></tr> `
 
         }
     });
@@ -759,6 +693,20 @@ function find_pass() {
 }
 
 function createFile_mon() {
+
+    let modal = document.getElementsByClassName("modal")[0];
+    let modal_content = document.getElementsByClassName("modal-content")[0];
+
+
+    modal.style.display = "block";
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
     let elements = document.getElementsByClassName('chosen');
     let chosen = [];
 
@@ -794,46 +742,62 @@ function createFile_mon() {
     }
 
     let content = "";
+    let modal_cont = "";
     let statistics = "";
     let colors = [];
     let date = document.getElementById("mon_date");
     date = date.value;
     content += "6:e mon (vit-gult): \n";
+    modal_cont += '<h2 style="color: #FFF370">6:e mon (vit-gult):</h2>';
+
 
     let yellow = true;
     let orangewhite = true;
     let orange = true;
     let greenwhite = true;
     let green = true;
+    let all = true;
 
     for (let index = 0; index < chosen.length; index++) {
 
         if (chosen[index].class == "yellow" && yellow) {
             content += "\n5e mon (gul-vitt): \n";
+            modal_cont += '<h2 style="color: #FFEB0A">5e mon (gul-vitt):</h2>';
             yellow = false;
         }
 
         if (chosen[index].class == "orangewhite" && orangewhite) {
             content += "\n4e mon: (vit-orange): \n";
+            modal_cont += '<h2 style="color: #FEB486">4e mon: (vit-orange):</h2>';
             orangewhite = false;
         }
 
         if (chosen[index].class == "orange" && orange) {
             content += "\n3:e mon (orange-vitt): \n";
+            modal_cont += '<h2 style="color: #FD7521">3:e mon (orange-vitt):</h2>';
             orange = false;
         }
 
         if (chosen[index].class == "greenwhite" && greenwhite) {
             content += "\n2:a mon (vit-grön): \n";
+            modal_cont += '<h2 style="color: #A2CDB7">2:a mon (vit-grön):</h2>';
             greenwhite = false;
         }
 
         if (chosen[index].class == "green" && green) {
             content += "\n2:a mon (grön-vitt): \n";
+            modal_cont += '<h2 style="color: #40775A">2:a mon (grön-vitt): </h2>';
             green = false;
         }
 
+        if (chosen[index].class == "all" && all) {
+            content += "\nGrundläggande tekniker: \n";
+            modal_cont += '<h2 style="color: #D474BE">Grundläggande tekniker: </h2>';
+            all = false;
+        }
+
         content += "" + chosen[index].name + "\n";
+        modal_cont += "<p>" + chosen[index].name + "</p>";
         statistics += "" + chosen[index].name + "\n";
         colors.push(chosen[index].class);
     }
@@ -862,10 +826,28 @@ function createFile_mon() {
 
     content += "\n\nFörslag på uppvärmningar:\n";
 
+    modal_cont += "<h3>Förslag på uppvärmningar:</h3>"
+
     warmup.forEach(element => {
         content += element + "\n"
+        modal_cont += "<p>" + element + "</p>"
     });
 
+
+
+    modal_content.innerHTML = modal_cont + '<button class="close">Spara pass</button>';
+
+    let span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+        download_file(content, group, date);
+    }
+
+}
+
+function download_file(content, group, date) {
     let file = new File(["\ufeff" + content], `${group}_${date}.txt`, { type: "text/plain:charset=UTF-8" });
 
     url = window.URL.createObjectURL(file);
@@ -877,6 +859,8 @@ function createFile_mon() {
     a.click();
     window.URL.revokeObjectURL(url);
 }
+
+
 
 function search_mon() {
     clear_all();
@@ -1002,6 +986,18 @@ function clear_search() {
 
 function saveplan_mon() {
 
+    let modal = document.getElementsByClassName("modal")[0];
+    let modal_content = document.getElementsByClassName("modal-content")[0];
+
+
+    modal.style.display = "block";
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 
     let elements = [];
 
@@ -1024,46 +1020,71 @@ function saveplan_mon() {
     console.log(chosen);
 
     let content = "";
+    let modal_cont = "";
+
     let statistics = "";
     let colors = [];
     let date = document.getElementById("mon_plan_date");
     date = date.value;
     content += "6:e mon (vit-gult): \n";
+    modal_cont += '<h2 style="color: #FFF370">6:e mon (vit-gult):</h2>';
+
 
     let yellow = true;
     let orangewhite = true;
     let orange = true;
     let greenwhite = true;
     let green = true;
+    let all = true;
+
 
     for (let index = 0; index < chosen.length; index++) {
 
         if (chosen[index].class == "yellow" && yellow) {
             content += "\n5e mon (gul-vitt): \n";
+            modal_cont += '<h2 style="color: #FFEB0A">5e mon (gul-vitt):</h2>';
+
             yellow = false;
         }
 
         if (chosen[index].class == "orangewhite" && orangewhite) {
             content += "\n4e mon: (vit-orange): \n";
+            modal_cont += '<h2 style="color: #FEB486">4e mon: (vit-orange):</h2>';
+
             orangewhite = false;
         }
 
         if (chosen[index].class == "orange" && orange) {
             content += "\n3:e mon (orange-vitt): \n";
+            modal_cont += '<h2 style="color: #FD7521">3:e mon (orange-vitt):</h2>';
+
             orange = false;
         }
 
         if (chosen[index].class == "greenwhite" && greenwhite) {
             content += "\n2:a mon (vit-grön): \n";
+            modal_cont += '<h2 style="color: #A2CDB7">2:a mon (vit-grön):</h2>';
+
             greenwhite = false;
         }
 
         if (chosen[index].class == "green" && green) {
             content += "\n2:a mon (grön-vitt): \n";
+            modal_cont += '<h2 style="color: #40775A">2:a mon (grön-vitt): </h2>';
+
             green = false;
         }
 
+        if (chosen[index].class == "all" && all) {
+            content += "\nGrundläggande tekniker: \n";
+            modal_cont += '<h2 style="color: #D474BE">Grundläggande tekniker: </h2>';
+            all = false;
+        }
+
+
         content += "" + chosen[index].name + "\n";
+        modal_cont += "<p>" + chosen[index].name + "</p>";
+
         statistics += "" + chosen[index].name + "\n";
         colors.push(chosen[index].class);
     }
@@ -1090,18 +1111,148 @@ function saveplan_mon() {
     });
 
 
-    let file = new File(["\ufeff" + content], `${group}_${date}.txt`, { type: "text/plain:charset=UTF-8" });
+    modal_content.innerHTML = modal_cont + '<button class="close">Spara pass</button>';
 
-    url = window.URL.createObjectURL(file);
+    let span = document.getElementsByClassName("close")[0];
 
-    let a = document.createElement("a");
-    a.style = "display: none";
-    a.href = url;
-    a.download = file.name;
-    a.click();
-    window.URL.revokeObjectURL(url);
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+        download_file(content, group, date);
+    }
 
 }
+
+function saveplan_kuy() {
+
+    let modal = document.getElementsByClassName("modal")[0];
+    let modal_content = document.getElementsByClassName("modal-content")[0];
+
+
+    modal.style.display = "block";
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    let elements = [];
+
+    let trs = document.querySelectorAll(`tr`);
+    trs.forEach(element => {
+        if (element.children[3].classList[0] == "chosen") {
+            elements.push(element.children[1])
+        }
+    });
+
+    let chosen = [];
+
+
+    for (let index = 0; index < elements.length; index++) {
+        chosen.push({ "class": elements[index].classList[0], "name": elements[index].innerText });
+    }
+
+    chosen.sort((a, b) => (a.class < b.class) ? 1 : ((b.class < a.class) ? -1 : 0))
+
+    console.log(chosen);
+
+    let content = "";
+    let modal_cont = "";
+
+    let statistics = "";
+    let colors = [];
+    let date = document.getElementById("kuy_plan_date");
+    date = date.value;
+    content += "5:e kuy: \n";
+    modal_cont += '<h2 style="color: rgb(255, 235, 10)">5:e kuy:</h2>';
+
+
+    let orange = true;
+    let green = true;
+    let blue = true;
+    let brown = true;
+    let all = true;
+
+    for (let index = 0; index < chosen.length; index++) {
+
+        if (chosen[index].class == "orange" && orange) {
+            content += "\n4e kuy: \n";
+            modal_cont += '<h2 style="color: rgb(253, 117, 33)">4e kuy:</h2>';
+            orange = false;
+        }
+
+        if (chosen[index].class == "green" && green) {
+            content += "\n3:e kuy: \n";
+            modal_cont += '<h2 style="color: rgb(64, 119, 90)">3e kuy:</h2>';
+            green = false;
+        }
+
+        if (chosen[index].class == "blue" && blue) {
+            content += "\n2:a kuy: \n";
+            modal_cont += '<h2 style="color: rgb(52, 89, 149)">2a kuy:</h2>';
+
+            blue = false;
+        }
+
+        if (chosen[index].class == "brown" && brown) {
+            content += "\n1:a kuy: \n";
+            modal_cont += '<h2 style="color: rgb(72, 39, 40)">1:a kuy:</h2>';
+
+            brown = false;
+        }
+
+
+        if (chosen[index].class == "all" && all) {
+            content += "\nGrundläggande tekniker: \n";
+            modal_cont += '<h2 style="color: #D474BE">Grundläggande tekniker: </h2>';
+
+            all = false;
+        }
+
+        content += "" + chosen[index].name + "\n";
+        modal_cont += "<p>" + chosen[index].name + "</p>";
+
+        statistics += "" + chosen[index].name + "\n";
+        colors.push(chosen[index].class);
+
+
+    }
+
+    let tekniker = statistics.split('\n');
+
+    let sel = document.getElementById("stat_group_plan")
+    let group = sel.value;
+
+    if (group == "") {
+        let info = document.getElementById("info");
+        info.innerHTML = 'Du behöver välja vilken grupp du vill skapa passet för, om du vill spara statistiken.'
+
+        setTimeout(function () { info.innerHTML = ""; }, 5000);
+    }
+
+    let i = 0;
+
+    tekniker.forEach(element => {
+        if (element != "") {
+            savepass(element, group, colors[i])
+            i++;
+        }
+    });
+
+    modal_content.innerHTML = modal_cont + '<button class="close">Spara pass</button>';
+
+    let span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+        download_file(content, group, date);
+    }
+
+}
+
 
 function delete_old_pass() {
     let trs = document.querySelectorAll('tr');
@@ -1114,8 +1265,8 @@ function delete_old_pass() {
     trs.forEach(tr => {
         if (tr.innerHTML != "") {
 
-            if (tr.children[2].classList[0] == 'chosen') {
-                chosen.push(tr.children[1]);
+            if (tr.children[2]?.classList[0] == 'chosen') {
+                chosen.push(tr);
             }
         }
     });
@@ -1125,24 +1276,19 @@ function delete_old_pass() {
         let info = document.getElementById('info');
         info.innerHTML = "Du måste först hitta ett gammalt pass och välja vilka tekniker från det du vill radera."
     } else {
+
         let start = document.getElementById("stat_pass_date");
         let date = start.value;
-
 
         let gr = document.getElementById("stat_pass_group");
         let group = gr.value;
 
-
-
         chosen.forEach(element => {
-            console.log(date);
-            console.log(group);
-            console.log(element.innerHTML);
-
-
-
-            delete_from_pass(date, group, element.innerHTML)
+            delete_from_pass(date, group, element.children[1].innerHTML)
+            element.style.display = "none";
         });
+
+
 
     }
 }
