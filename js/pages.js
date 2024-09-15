@@ -88,6 +88,23 @@ function listen_click_plan() {
     });
 }
 
+function listen_click_old_pass() {
+    let trs = document.querySelectorAll(`tr`);
+    console.log(trs);
+
+    trs.forEach((tr) => {
+        tr.addEventListener(`click`, function () {
+            console.log(tr);
+
+            if (tr.innerHTML != '') {
+
+                tr.children[2].classList.toggle("chosen");
+            }
+            ;
+        });
+    });
+}
+
 function createFile_mon() {
     let elements = document.getElementsByClassName('chosen');
     let chosen = [];
@@ -206,83 +223,6 @@ function createFile_mon() {
     a.download = file.name;
     a.click();
     window.URL.revokeObjectURL(url);
-}
-
-function search_mon() {
-    clear_all();
-    let input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("search_field");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("table");
-    tr = table.getElementsByTagName("tr");
-
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                td.click();
-            } else {
-                td.style.color = "white";
-
-            }
-        }
-
-        td = tr[i].getElementsByTagName("td")[1];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                td.click();
-            } else {
-                td.style.color = "white";
-
-            }
-        }
-
-        td = tr[i].getElementsByTagName("td")[2];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                td.click();
-            } else {
-                td.style.color = "white";
-
-            }
-        }
-
-        td = tr[i].getElementsByTagName("td")[3];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                td.click();
-            } else {
-                td.style.color = "white";
-
-            }
-        }
-
-        td = tr[i].getElementsByTagName("td")[4];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                td.click();
-            } else {
-                td.style.color = "white";
-
-            }
-        }
-
-        td = tr[i].getElementsByTagName("td")[5];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                td.click();
-            } else {
-                td.style.color = "white";
-
-            }
-        }
-    }
 }
 
 function clear_all() {
@@ -423,57 +363,67 @@ function search_kuy() {
     input = document.getElementById("search_field");
     filter = input.value.toUpperCase();
     table = document.getElementById("table");
-    tr = table.getElementsByTagName("tr");
+    let trs = table.getElementsByTagName("tr");
 
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
+    for (i = 0; i < trs.length; i++) {
+        let intr = false;
+        td = trs[i].getElementsByTagName("td")[0];
         if (td) {
             txtValue = td.textContent || td.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 td.click();
+                intr = true;
             } else {
                 td.style.color = "white";
             }
         }
 
-        td = tr[i].getElementsByTagName("td")[1];
+        td = trs[i].getElementsByTagName("td")[1];
         if (td) {
             txtValue = td.textContent || td.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 td.click();
-            } else {
-                td.style.color = "white";
+                intr = true;
 
-            }
-        }
-
-        td = tr[i].getElementsByTagName("td")[2];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                td.click();
             } else {
                 td.style.color = "white";
 
             }
         }
 
-        td = tr[i].getElementsByTagName("td")[3];
+        td = trs[i].getElementsByTagName("td")[2];
         if (td) {
             txtValue = td.textContent || td.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 td.click();
+                intr = true;
+
             } else {
                 td.style.color = "white";
 
             }
         }
 
-        td = tr[i].getElementsByTagName("td")[4];
+        td = trs[i].getElementsByTagName("td")[3];
         if (td) {
             txtValue = td.textContent || td.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 td.click();
+                intr = true;
+
+            } else {
+                td.style.color = "white";
+
+            }
+        }
+
+        td = trs[i].getElementsByTagName("td")[4];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                td.click();
+                intr = true;
+
             } else {
                 td.style.color = "white";
 
@@ -482,7 +432,7 @@ function search_kuy() {
     }
 }
 
-function search_kuy_plan() {
+function search_plan() {
     clear_all_plan();
 
     let input, filter, tr, td, i, txtValue;
@@ -674,6 +624,113 @@ function fill_result(reply, pass_count) {
     results_p.innerHTML = HTML;
 }
 
+function fill_result_old_pass(reply, pass_count) {
+
+    let HTML = `<table style="border-collapse: separate;empty-cells: hide;">`;
+
+    let orange = true
+    let green = true
+    let blue = true
+    let brown = true
+    let yellowwhite = true
+    let whiteorange = true
+    let orangewhite = true
+    let whitegreen = true
+    let greenwhite = true
+
+    const mp = new Map(reply.map(o => [o.teknik, { ...o, count: 0 }]));
+    for (const { teknik } of reply) mp.get(teknik).count++;
+    let result = Array.from(mp.values());
+
+    result.sort((a, b) => (a.color < b.color) ? 1 : ((b.color < a.color) ? -1 : 0))
+
+    result.forEach(element => {
+
+        HTML += '<tr>';
+
+        if (element.group == "V2" || element.group == "V1" || element.group == "S1") {
+
+            if (element.color == 'yellow') {
+                HTML += '<td style="background-color: rgb(255, 235, 10);color: rgb(255, 235, 10);border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'orange') {
+                if (orange) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    orange = false;
+                }
+                HTML += '<td style="background-color: rgb(253, 117, 33);color: rgb(253, 117, 33);border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'green') {
+                if (green) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    green = false;
+                }
+                HTML += '<td style="background-color: rgb(64, 119, 90);color: rgb(64, 119, 90);border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'blue') {
+                if (blue) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    blue = false;
+                }
+                HTML += '<td style="background-color: rgb(52, 89, 149);color: rgb(52, 89, 149);border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'brown') {
+                if (brown) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    brown = false;
+                }
+                HTML += '<td style="background-color: rgb(72, 39, 40);color: rgb(72, 39, 40);border: 1px solid #24292e38;">.</td>'
+            }
+
+        } else {
+
+            if (element.color == 'yellowwhite') {
+                HTML += '<td style="background-color: #FFF370; color: #FFF370; border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'yellow') {
+                if (yellowwhite) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    yellowwhite = false;
+                }
+                HTML += '<td style="background-color: #FFEB0A;color: #FFEB0A;border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'orangewhite') {
+                if (whiteorange) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    whiteorange = false;
+                }
+                HTML += '<td style="background-color: #FEB486;color: #FEB486;border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'orange') {
+                if (orangewhite) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    orangewhite = false;
+                }
+                HTML += '<td style="background-color: #FD7521 ;color: #FD7521;border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'greenwhite') {
+                if (whitegreen) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    whitegreen = false;
+                }
+                HTML += '<td style="background-color: #A2CDB7;color: #A2CDB7;border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'green') {
+                if (greenwhite) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    greenwhite = false;
+                }
+                HTML += '<td id="td" style="background-color: #40775A;color: #40775A; border: 1px solid #24292e38;">.</td>'
+            }
+
+        }
+
+        if (pass_count) {
+            HTML += `<td style="width:50vw;"> ${element.teknik}</td><td style="width:42px;"> ${element.count}</td></tr> `
+
+        } else {
+            HTML += `<td id=${element.id} style="width:50vw;"> ${element.teknik}</td><td style="width:30px"><input type="checkbox" name="select"></td></tr> `
+
+        }
+    });
+
+    HTML += '</table>'
+
+    let results_p = document.getElementById("results");
+    results_p.innerHTML = HTML;
+}
+
 function find_pass() {
 
     let start = document.getElementById("stat_pass_date");
@@ -692,9 +749,11 @@ function find_pass() {
 
         getpass(date, group).then(function (reply) {
 
-            fill_result(reply, false);
+            fill_result_old_pass(reply, false);
+            listen_click_old_pass();
 
         });
+
     }
 
 }
@@ -907,6 +966,12 @@ function clear_all() {
             td.style.backgroundColor = 'rgb(255, 255, 255)';
         }
     }
+
+    let ths = document.getElementsByTagName('th');
+
+    for (let th of ths) {
+        th.style.color = "black";
+    }
 }
 
 function clear_all_plan() {
@@ -1036,4 +1101,48 @@ function saveplan_mon() {
     a.click();
     window.URL.revokeObjectURL(url);
 
+}
+
+function delete_old_pass() {
+    let trs = document.querySelectorAll('tr');
+
+    console.log(trs);
+
+
+    let chosen = [];
+
+    trs.forEach(tr => {
+        if (tr.innerHTML != "") {
+
+            if (tr.children[2].classList[0] == 'chosen') {
+                chosen.push(tr.children[1]);
+            }
+        }
+    });
+
+
+    if (chosen.length == 0) {
+        let info = document.getElementById('info');
+        info.innerHTML = "Du måste först hitta ett gammalt pass och välja vilka tekniker från det du vill radera."
+    } else {
+        let start = document.getElementById("stat_pass_date");
+        let date = start.value;
+
+
+        let gr = document.getElementById("stat_pass_group");
+        let group = gr.value;
+
+
+
+        chosen.forEach(element => {
+            console.log(date);
+            console.log(group);
+            console.log(element.innerHTML);
+
+
+
+            delete_from_pass(date, group, element.innerHTML)
+        });
+
+    }
 }

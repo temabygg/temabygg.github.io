@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
+
 
 * {
     margin: 0;
@@ -15,12 +17,23 @@ body {
 }
 
 main {
-    min-height: 60vh;
+    min-height: 75vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer p {
+    color: #24292e38;
+    padding-bottom: 15px;
 }
 
 #text {
@@ -69,7 +82,7 @@ nav a {
 }
 
 nav img {
-    height: 80px;
+    height: 90px;
     padding: 0;
 }
 
@@ -217,10 +230,10 @@ img {
 }
 
 #title {
-    padding-bottom: 50px;
     font-weight: 500;
-    font-size: 3.2rem;
-    font-family: Raleway
+    font-size: 6rem;
+    font-family: Koulen;
+    color: #24292e
 }
 
 #back_button {
@@ -359,12 +372,14 @@ label {
 #statistics_button,
 #stat_group,
 #stat_pass_group,
-#statistics_pass_button {
+#statistics_pass_button,
+#delete_chosen {
     margin-top: 15px;
 }
 
 #stat_pass_group,
-#statistics_pass_button {
+#statistics_pass_button,
+#delete_chosen {
     margin-top: 30px;
 }
 
@@ -450,4 +465,10 @@ label {
 
 #table .all {
     text-align: center;
+}
+
+input[type="checkbox"] {
+    width: 3em;
+    height: 3rem;
+    accent-color: rgb(204, 51, 51);
 }

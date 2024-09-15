@@ -37,7 +37,7 @@
     <header>
         <nav>
 
-            <img src="./resources/logo.png" alt="logo">
+            <img src="./resources/logoMJJK.png" alt="logo">
             <a class="navigation active" href="/">START</a>
             <div id="dropdown">
                 <a id="dropy">MON</a>
@@ -75,7 +75,7 @@
 
     <script type="module">
 
-        import { doc, collection, query, where, addDoc, getDocs, getFirestore } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
+        import { doc, collection, query, where, addDoc, getDocs, getFirestore, deleteDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
 
         async function savepass(teknik, group, color) {
             const app = window.app;
@@ -133,7 +133,25 @@
 
         window.getpass = getpass;
 
+        async function delete_from_pass(date, group, teknik) {
+            const app = window.app;
+            const db = getFirestore(app);
 
+            const q = query(collection(db, "pass"), where("date", "==", `${date}`), where("group", "==", `${group}`), where("teknik", "==", `${teknik.trimStart()}`));
+
+            const querySnapshot = await getDocs(q);
+
+            querySnapshot.forEach((doc) => {
+
+                deleteDoc(doc.ref);
+            })
+        }
+
+        window.delete_from_pass = delete_from_pass;
+
+
+
+        /*
         const str = "MALMÖ  JU-JUTSUKLUBB";
         const text = document.getElementById("text");
         window.onload = function () {
@@ -145,7 +163,13 @@
                 span.style.transform = `rotate(${15 * i - 30}deg)`;
             }
         }
+
+        */
     </script>
+    <footer>
+        <p>Utvecklat av Fanny Söderlund för Malmö Ju-jutsuklubb</p>
+    </footer>
 </body>
+
 
 </html>
