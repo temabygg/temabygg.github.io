@@ -48,7 +48,7 @@
             </div>
 
             <div id="dropdown">
-                <a id="dropy">KUY</a>
+                <a id="dropy">KYU</a>
                 <div id="dropdown-content">
                     <a class="navigation" href="/plan-kuy"">VERTIKALT</a>
                     <a class=" navigation" href="/kuy">HORISONTELLT</a>
@@ -77,12 +77,9 @@
 
         import { doc, collection, query, where, addDoc, getDocs, getFirestore, deleteDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
 
-        async function savepass(teknik, group, color) {
+        async function savepass(teknik, group, date, color) {
             const app = window.app;
             const db = getFirestore(app);
-
-            let date = new Date();
-            date = date.toISOString().split('T')[0];
 
             await addDoc(collection(db, "pass"), {
                 teknik: teknik,
@@ -167,7 +164,7 @@
         */
     </script>
     <footer>
-        <p>Utvecklat av Fanny Söderlund för Malmö Ju-jutsuklubb</p>
+        <p>Utvecklat med ❤️ av Fanny Söderlund för Malmö Ju-jutsuklubb</p>
     </footer>
 </body>
 

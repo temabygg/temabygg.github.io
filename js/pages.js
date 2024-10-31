@@ -245,7 +245,7 @@ function createFile_kuy() {
 
     tekniker.forEach(element => {
         if (element != "") {
-            savepass(element, group, colors[i])
+            savepass(element, group, date, colors[i])
             i++;
         }
     });
@@ -819,7 +819,7 @@ function createFile_mon() {
 
     tekniker.forEach(element => {
         if (element != "") {
-            savepass(element, group, colors[i])
+            savepass(element, group, date, colors[i])
             i++;
         }
     });
@@ -1105,7 +1105,7 @@ function saveplan_mon() {
 
     tekniker.forEach(element => {
         if (element != "") {
-            savepass(element, group, colors[i])
+            savepass(element, group, date, colors[i])
             i++;
         }
     });
@@ -1165,6 +1165,7 @@ function saveplan_kuy() {
     let colors = [];
     let date = document.getElementById("kuy_plan_date");
     date = date.value;
+
     content += "5:e kuy: \n";
     modal_cont += '<h2 style="color: rgb(255, 235, 10)">5:e kuy:</h2>';
 
@@ -1236,7 +1237,7 @@ function saveplan_kuy() {
 
     tekniker.forEach(element => {
         if (element != "") {
-            savepass(element, group, colors[i])
+            savepass(element, group, date, colors[i])
             i++;
         }
     });
