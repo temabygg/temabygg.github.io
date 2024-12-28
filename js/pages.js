@@ -10,20 +10,29 @@ function listen_click() {
             if (td.innerHTML != "") {
                 td.classList.toggle("chosen");
 
-                if (td.classList[0].startsWith("ye")) {
+                if (td.classList[0].startsWith("yellow")) {
                     td.style.backgroundColor = td.style.backgroundColor === 'rgba(237, 240, 96, 0.7)' ? 'rgba(255, 255, 255, 1)' : 'rgba(237, 240, 96, 0.7)';
                 }
-                if (td.classList[0].startsWith("or")) {
+                if (td.classList[0].startsWith("orange")) {
                     td.style.backgroundColor = td.style.backgroundColor === 'rgba(240, 128, 60, 0.7)' ? 'rgba(255, 255, 255, 1)' : 'rgba(240, 128, 60, 0.7)';
                 }
-                if (td.classList[0].startsWith("gr")) {
+                if (td.classList[0].startsWith("green")) {
                     td.style.backgroundColor = td.style.backgroundColor === 'rgba(81, 152, 114, 0.7)' ? 'rgba(255, 255, 255, 1)' : 'rgba(81, 152, 114, 0.7)';
                 }
-                if (td.classList[0].startsWith("bl")) {
+                if (td.classList[0].startsWith("blue")) {
                     td.style.backgroundColor = td.style.backgroundColor === 'rgba(52, 89, 149, 0.7)' ? 'rgba(255, 255, 255, 1)' : 'rgba(52, 89, 149, 0.7)';
                 }
-                if (td.classList[0].startsWith("br")) {
+                if (td.classList[0].startsWith("brown")) {
                     td.style.backgroundColor = td.style.backgroundColor === 'rgba(72, 39, 40, 0.7)' ? 'rgba(255, 255, 255, 1)' : 'rgba(72, 39, 40, 0.7)';
+                }
+                if (td.classList[0].startsWith("blackone")) {
+                    td.style.backgroundColor = td.style.backgroundColor === 'rgba(77, 77, 77, 0.7)' ? 'rgba(255, 255, 255, 1)' : 'rgba(77, 77, 77, 0.7)';
+                }
+                if (td.classList[0].startsWith("blacktwo")) {
+                    td.style.backgroundColor = td.style.backgroundColor === 'rgba(26, 26, 26, 0.7)' ? 'rgba(255, 255, 255, 1)' : 'rgba(26, 26, 26, 0.7)';
+                }
+                if (td.classList[0].startsWith("blackthree")) {
+                    td.style.backgroundColor = td.style.backgroundColor === 'rgba(0, 0, 0, 0.7)' ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 0.7)';
                 }
                 if (td.classList[0].startsWith("al")) {
                     td.style.backgroundColor = td.style.backgroundColor === 'rgba(212, 116, 190, 0.7)' ? 'rgba(255, 255, 255, 1)' : 'rgba(212, 116, 190, 0.7)';
@@ -78,6 +87,15 @@ function listen_click_plan() {
                     tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(72, 39, 40)' ? 'rgb(255, 255, 255)' : 'rgb(72, 39, 40)';
                 }
 
+                if (tr.children[1].classList[0] == "blackone") {
+                    tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(77, 77, 77)' ? 'rgb(255, 255, 255)' : 'rgb(77, 77, 77)';
+                }
+                if (tr.children[1].classList[0] == "blacktwo") {
+                    tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(26, 26, 26)' ? 'rgb(255, 255, 255)' : 'rgb(26, 26, 26)';
+                }
+                if (tr.children[1].classList[0] == "blackthree") {
+                    tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(0, 0, 0)' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)';
+                }
                 if (tr.children[1].classList[0] == "all") {
                     tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(212, 116, 190)' ? 'rgb(255, 255, 255)' : 'rgb(212, 116, 190)';
                 }
@@ -136,18 +154,6 @@ function createFile_kuy() {
     let elements = document.getElementsByClassName('chosen');
     let chosen = [];
 
-    let facit = {};
-    facit['tab'] = "Tsuri ashi bakåt";
-    facit['taf'] = "Tsuri ashi bakåt";
-    facit['tlv'] = "Taisabaki lång vänster";
-    facit['k'] = "Kawashi";
-    facit['tkv'] = "Taisabaki kort vänster";
-    facit['m'] = "Maesabaki";
-    facit['jcu'] = "Jodan chikai uke";
-    facit['ub'] = "Uppgång bakåt";
-    facit['tlh'] = "Taisabaki lång höger";
-    facit['aa'] = "Ayumi ashi (samma kamae)"
-
 
     for (let index = 0; index < elements.length; index++) {
         chosen.push({ "class": elements[index].classList[0], "name": elements[index].innerText });
@@ -155,77 +161,24 @@ function createFile_kuy() {
 
     chosen.sort((a, b) => (a.class < b.class) ? 1 : ((b.class < a.class) ? -1 : 0))
 
-    console.log(chosen);
-
-    let warmup = [];
-    for (let index = 0; index < elements.length; index++) {
-        let classlist = elements[index].classList;
-        classlist.forEach(element => {
-            if (facit.hasOwnProperty(element)) {
-                if (!warmup.includes(facit[element])) {
-                    warmup.push(facit[element]);
-                }
-            }
-        });
-    }
-
-    let content = "";
     let modal_cont = "";
 
     let statistics = "";
     let colors = [];
     let date = document.getElementById("kuy_date");
     date = date.value;
-    content += "5:e kuy: \n";
-    modal_cont += '<h2 style="color: rgb(255, 235, 10)">5:e kuy:</h2>';
-
-    let orange = true;
-    let green = true;
-    let blue = true;
-    let brown = true;
-    let all = true;
 
     for (let index = 0; index < chosen.length; index++) {
 
-        if (chosen[index].class == "orange" && orange) {
-            content += "\n4e kuy: \n";
-            modal_cont += '<h2 style="color: rgb(253, 117, 33)">4e kuy:</h2>';
-            orange = false;
-        }
-
-        if (chosen[index].class == "green" && green) {
-            content += "\n3:e kuy: \n";
-            modal_cont += '<h2 style="color: rgb(64, 119, 90)">3e kuy:</h2>';
-            green = false;
-        }
-
-        if (chosen[index].class == "blue" && blue) {
-            content += "\n2:a kuy: \n";
-            modal_cont += '<h2 style="color: rgb(52, 89, 149)">2a kuy:</h2>';
-
-            blue = false;
-        }
-
-        if (chosen[index].class == "brown" && brown) {
-            content += "\n1:a kuy: \n";
-            modal_cont += '<h2 style="color: rgb(72, 39, 40)">1:a kuy:</h2>';
-
-            brown = false;
-        }
-
-
-        if (chosen[index].class == "all" && all) {
-            content += "\nGrundläggande tekniker: \n";
-            modal_cont += '<h2 style="color: #D474BE">Grundläggande tekniker: </h2>';
-
-            all = false;
-        }
-
-        content += "" + chosen[index].name + "\n";
-        modal_cont += "<p>" + chosen[index].name + "</p>";
+        modal_cont += `
+        <div class="draggable" draggable="true">
+        <p>
+            <span class="circle ${chosen[index].class}"></span>
+                ${chosen[index].name}
+            </p>
+        </div>`;
 
         statistics += "" + chosen[index].name + "\n";
-
         colors.push(chosen[index].class);
     }
 
@@ -241,36 +194,104 @@ function createFile_kuy() {
         setTimeout(function () { info.innerHTML = ""; }, 5000);
     }
 
-    let i = 0;
+    // Add a text field for adding new items dynamically
+    modal_cont += `
+    <div id="new-text-container">
+        <input type="text" id="new-text" placeholder="Lägg till fritext" />
+        <button id="add-text">Lägg till</button>
+    </div>`;
 
-    tekniker.forEach(element => {
-        if (element != "") {
-            savepass(element, group, date, colors[i])
-            i++;
-        }
-    });
+    modal_cont += `<button class="close">Spara pass</button>`;
 
-    content += "\n\nFörslag på uppvärmningar:\n";
-    modal_cont += "<h3>Förslag på uppvärmningar:</h3>"
+    // Set the modal content
+    modal_content.innerHTML = modal_cont;
 
+    let dragSrcEl = null;
 
-    warmup.forEach(element => {
-        content += element + "\n"
-        modal_cont += "<p>" + element + "</p>"
+    // Add drag-and-drop listeners
+    function addDragAndDropListeners(element) {
+        element.addEventListener('dragstart', (e) => {
+            dragSrcEl = element;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', element.outerHTML);
+            element.classList.add('dragging');
+        });
 
-    });
+        element.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        });
 
+        element.addEventListener('drop', (e) => {
+            e.stopPropagation(); // Prevent browser redirection
+            const draggingElement = document.querySelector('.dragging');
 
-    modal_content.innerHTML = modal_cont + '<button class="close">Spara pass</button>';
+            if (draggingElement && draggingElement !== element) {
+                element.insertAdjacentElement('beforebegin', draggingElement);
+            }
+            draggingElement?.classList?.remove('dragging');
+        });
 
-    let span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-        download_file(content, group, date);
+        element.addEventListener('dragend', () => {
+            element.classList?.remove('dragging');
+        });
     }
 
+    // Attach listeners to all draggable elements
+    document.querySelectorAll('.draggable').forEach(addDragAndDropListeners);
+
+    let addButton = modal_content.querySelector('#add-text');
+
+    addButton.onclick = function () {
+        let freeTextInput = document.getElementById('new-text');
+        let textValue = freeTextInput.value.trim(); // Get and trim the value of the text box
+
+        if (textValue) {
+            // Create a new draggable <p> element
+            let newParagraph = document.createElement('div');
+            newParagraph.classList.add('draggable');
+            newParagraph.setAttribute('draggable', 'true');
+            newParagraph.innerHTML = `
+            <p>
+                <span class="circle text"></span> ${textValue}
+            </p>
+        `;
+
+            // Append the new <p> to the modal
+            modal_content.appendChild(newParagraph);
+
+            // Clear the text box
+            freeTextInput.value = '';
+
+            // Make the newly added element draggable
+            document.querySelectorAll('.draggable').forEach(addDragAndDropListeners);
+        }
+    };
+
+    let span = document.getElementsByClassName("close")[0];
+    span.onclick = function () {
+
+        modal.style.display = "none";
+
+        // Collect reordered content
+        content = "";
+        const allTexts = modal_content.querySelectorAll("p");
+        allTexts.forEach(el => {
+            content += el.innerText + "\n";
+        });
+
+        download_file(content, group, date);
+
+        let i = 0;
+
+        tekniker.forEach(element => {
+            if (element != "") {
+                savepass(element, group, date, colors[i])
+                i++;
+            }
+        });
+
+    };
 }
 
 function search_kuy() {
@@ -442,6 +463,9 @@ function fill_result(reply, pass_count) {
     let green = true
     let blue = true
     let brown = true
+    let blackone = true
+    let blacktwo = true
+    let blackthree = true
     let yellowwhite = true
     let whiteorange = true
     let orangewhite = true
@@ -487,6 +511,24 @@ function fill_result(reply, pass_count) {
                     brown = false;
                 }
                 HTML += '<td style="background-color: rgb(72, 39, 40);color: rgb(72, 39, 40);border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'blackone') {
+                if (blackone) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    blackone = false;
+                }
+                HTML += '<td style="background-color: rgb(77, 77, 77);color: rgb(77, 77, 77);border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'blacktwo') {
+                if (blacktwo) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    blacktwo = false;
+                }
+                HTML += '<td style="background-color: rgb(26, 26, 26);color: rgb(26, 26, 26);border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'blackthree') {
+                if (blackthree) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    blackthree = false;
+                }
+                HTML += '<td style="background-color: rgb(0, 0, 0);color: rgb(0, 0, 0);border: 1px solid #24292e38;">.</td>'
             }
 
         } else {
@@ -557,6 +599,9 @@ function fill_result_old_pass(reply, pass_count) {
     let green = true
     let blue = true
     let brown = true
+    let blackone = true
+    let blacktwo = true
+    let blackthree = true
     let yellowwhite = true
     let whiteorange = true
     let orangewhite = true
@@ -602,6 +647,25 @@ function fill_result_old_pass(reply, pass_count) {
                     brown = false;
                 }
                 HTML += '<td style="background-color: rgb(72, 39, 40);color: rgb(72, 39, 40);border: 1px solid #24292e38;">.</td>'
+            }
+            else if (element.color == 'blackone') {
+                if (blackone) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    blackone = false;
+                }
+                HTML += '<td style="background-color: rgb(77, 77, 77);color: rgb(77, 77, 77);border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'blacktwo') {
+                if (blacktwo) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    blacktwo = false;
+                }
+                HTML += '<td style="background-color: rgb(26, 26, 26);color: rgb(26, 26, 26);border: 1px solid #24292e38;">.</td>'
+            } else if (element.color == 'blackthree') {
+                if (blackthree) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    blackthree = false;
+                }
+                HTML += '<td style="background-color: rgb(0, 0, 0);color: rgb(0, 0, 0);border: 1px solid #24292e38;">.</td>'
             }
 
         } else {
@@ -710,94 +774,29 @@ function createFile_mon() {
     let elements = document.getElementsByClassName('chosen');
     let chosen = [];
 
-    let facit = {};
-    facit['tab'] = "Tsuri ashi bakåt";
-    facit['taf'] = "Tsuri ashi bakåt";
-    facit['tlv'] = "Taisabaki lång vänster";
-    facit['k'] = "Kawashi";
-    facit['tkv'] = "Taisabaki kort vänster";
-    facit['m'] = "Maesabaki";
-    facit['jcu'] = "Jodan chikai uke";
-    facit['ub'] = "Uppgång bakåt";
-    facit['tlh'] = "Taisabaki lång höger";
-    facit['aa'] = "Ayumi ashi (samma kamae)"
-
-
     for (let index = 0; index < elements.length; index++) {
         chosen.push({ "class": elements[index].classList[0], "name": elements[index].innerText });
     }
 
     chosen.sort((a, b) => (a.class < b.class) ? 1 : ((b.class < a.class) ? -1 : 0))
 
-    let warmup = [];
-    for (let index = 0; index < elements.length; index++) {
-        let classlist = elements[index].classList;
-        classlist.forEach(element => {
-            if (facit.hasOwnProperty(element)) {
-                if (!warmup.includes(facit[element])) {
-                    warmup.push(facit[element]);
-                }
-            }
-        });
-    }
-
-    let content = "";
     let modal_cont = "";
     let statistics = "";
     let colors = [];
     let date = document.getElementById("mon_date");
     date = date.value;
-    content += "6:e mon (vit-gult): \n";
-    modal_cont += '<h2 style="color: #FFF370">6:e mon (vit-gult):</h2>';
 
-
-    let yellow = true;
-    let orangewhite = true;
-    let orange = true;
-    let greenwhite = true;
-    let green = true;
-    let all = true;
 
     for (let index = 0; index < chosen.length; index++) {
 
-        if (chosen[index].class == "yellow" && yellow) {
-            content += "\n5e mon (gul-vitt): \n";
-            modal_cont += '<h2 style="color: #FFEB0A">5e mon (gul-vitt):</h2>';
-            yellow = false;
-        }
+        modal_cont += `
+        <div class="draggable" draggable="true">
+        <p>
+            <span class="circle ${chosen[index].class}"></span>
+                ${chosen[index].name}
+            </p>
+        </div>`;
 
-        if (chosen[index].class == "orangewhite" && orangewhite) {
-            content += "\n4e mon: (vit-orange): \n";
-            modal_cont += '<h2 style="color: #FEB486">4e mon: (vit-orange):</h2>';
-            orangewhite = false;
-        }
-
-        if (chosen[index].class == "orange" && orange) {
-            content += "\n3:e mon (orange-vitt): \n";
-            modal_cont += '<h2 style="color: #FD7521">3:e mon (orange-vitt):</h2>';
-            orange = false;
-        }
-
-        if (chosen[index].class == "greenwhite" && greenwhite) {
-            content += "\n2:a mon (vit-grön): \n";
-            modal_cont += '<h2 style="color: #A2CDB7">2:a mon (vit-grön):</h2>';
-            greenwhite = false;
-        }
-
-        if (chosen[index].class == "green" && green) {
-            content += "\n2:a mon (grön-vitt): \n";
-            modal_cont += '<h2 style="color: #40775A">2:a mon (grön-vitt): </h2>';
-            green = false;
-        }
-
-        if (chosen[index].class == "all" && all) {
-            content += "\nGrundläggande tekniker: \n";
-            modal_cont += '<h2 style="color: #D474BE">Grundläggande tekniker: </h2>';
-            all = false;
-        }
-
-        content += "" + chosen[index].name + "\n";
-        modal_cont += "<p>" + chosen[index].name + "</p>";
         statistics += "" + chosen[index].name + "\n";
         colors.push(chosen[index].class);
     }
@@ -813,37 +812,105 @@ function createFile_mon() {
 
         setTimeout(function () { info.innerHTML = ""; }, 5000);
     }
+    // Add a text field for adding new items dynamically
+    modal_cont += `
+    <div id="new-text-container">
+        <input type="text" id="new-text" placeholder="Lägg till fritext" />
+        <button id="add-text">Lägg till</button>
+    </div>`;
 
+    modal_cont += `<button class="close">Spara pass</button>`;
 
-    let i = 0;
+    // Set the modal content
+    modal_content.innerHTML = modal_cont;
 
-    tekniker.forEach(element => {
-        if (element != "") {
-            savepass(element, group, date, colors[i])
-            i++;
+    let dragSrcEl = null;
+
+    // Add drag-and-drop listeners
+    function addDragAndDropListeners(element) {
+        element.addEventListener('dragstart', (e) => {
+            dragSrcEl = element;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', element.outerHTML);
+            element.classList.add('dragging');
+        });
+
+        element.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        });
+
+        element.addEventListener('drop', (e) => {
+            e.stopPropagation(); // Prevent browser redirection
+            const draggingElement = document.querySelector('.dragging');
+
+            if (draggingElement && draggingElement !== element) {
+                element.insertAdjacentElement('beforebegin', draggingElement);
+            }
+            draggingElement?.classList?.remove('dragging');
+        });
+
+        element.addEventListener('dragend', () => {
+            element.classList?.remove('dragging');
+        });
+    }
+
+    // Attach listeners to all draggable elements
+    document.querySelectorAll('.draggable').forEach(addDragAndDropListeners);
+
+    let addButton = modal_content.querySelector('#add-text');
+
+    addButton.onclick = function () {
+        let freeTextInput = document.getElementById('new-text');
+        let textValue = freeTextInput.value.trim(); // Get and trim the value of the text box
+
+        if (textValue) {
+            // Create a new draggable <p> element
+            let newParagraph = document.createElement('div');
+            newParagraph.classList.add('draggable');
+            newParagraph.setAttribute('draggable', 'true');
+            newParagraph.innerHTML = `
+            <p>
+                <span class="circle text"></span> ${textValue}
+            </p>
+        `;
+
+            // Append the new <p> to the modal
+            modal_content.appendChild(newParagraph);
+
+            // Clear the text box
+            freeTextInput.value = '';
+
+            // Make the newly added element draggable
+            document.querySelectorAll('.draggable').forEach(addDragAndDropListeners);
         }
-    });
-
-    content += "\n\nFörslag på uppvärmningar:\n";
-
-    modal_cont += "<h3>Förslag på uppvärmningar:</h3>"
-
-    warmup.forEach(element => {
-        content += element + "\n"
-        modal_cont += "<p>" + element + "</p>"
-    });
-
-
-
-    modal_content.innerHTML = modal_cont + '<button class="close">Spara pass</button>';
+    };
 
     let span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on <span> (x), close the modal
     span.onclick = function () {
+
         modal.style.display = "none";
+
+        // Collect reordered content
+        content = "";
+        const allTexts = modal_content.querySelectorAll("p");
+        allTexts.forEach(el => {
+            content += el.innerText + "\n";
+        });
+
         download_file(content, group, date);
-    }
+
+
+        let i = 0;
+
+        tekniker.forEach(element => {
+            if (element != "") {
+                savepass(element, group, date, colors[i])
+                i++;
+            }
+        });
+
+    };
 
 }
 
@@ -941,7 +1008,6 @@ function search_mon() {
 
 function clear_all() {
     let tds = document.getElementsByTagName('td');
-    console.log(tds);
     for (let td of tds) {
         td?.classList.remove('chosen');
 
@@ -1017,73 +1083,22 @@ function saveplan_mon() {
 
     chosen.sort((a, b) => (a.class < b.class) ? 1 : ((b.class < a.class) ? -1 : 0))
 
-    console.log(chosen);
-
-    let content = "";
     let modal_cont = "";
 
     let statistics = "";
     let colors = [];
     let date = document.getElementById("mon_plan_date");
     date = date.value;
-    content += "6:e mon (vit-gult): \n";
-    modal_cont += '<h2 style="color: #FFF370">6:e mon (vit-gult):</h2>';
-
-
-    let yellow = true;
-    let orangewhite = true;
-    let orange = true;
-    let greenwhite = true;
-    let green = true;
-    let all = true;
-
 
     for (let index = 0; index < chosen.length; index++) {
 
-        if (chosen[index].class == "yellow" && yellow) {
-            content += "\n5e mon (gul-vitt): \n";
-            modal_cont += '<h2 style="color: #FFEB0A">5e mon (gul-vitt):</h2>';
-
-            yellow = false;
-        }
-
-        if (chosen[index].class == "orangewhite" && orangewhite) {
-            content += "\n4e mon: (vit-orange): \n";
-            modal_cont += '<h2 style="color: #FEB486">4e mon: (vit-orange):</h2>';
-
-            orangewhite = false;
-        }
-
-        if (chosen[index].class == "orange" && orange) {
-            content += "\n3:e mon (orange-vitt): \n";
-            modal_cont += '<h2 style="color: #FD7521">3:e mon (orange-vitt):</h2>';
-
-            orange = false;
-        }
-
-        if (chosen[index].class == "greenwhite" && greenwhite) {
-            content += "\n2:a mon (vit-grön): \n";
-            modal_cont += '<h2 style="color: #A2CDB7">2:a mon (vit-grön):</h2>';
-
-            greenwhite = false;
-        }
-
-        if (chosen[index].class == "green" && green) {
-            content += "\n2:a mon (grön-vitt): \n";
-            modal_cont += '<h2 style="color: #40775A">2:a mon (grön-vitt): </h2>';
-
-            green = false;
-        }
-
-        if (chosen[index].class == "all" && all) {
-            content += "\nGrundläggande tekniker: \n";
-            modal_cont += '<h2 style="color: #D474BE">Grundläggande tekniker: </h2>';
-            all = false;
-        }
-
-
-        content += "" + chosen[index].name + "\n";
-        modal_cont += "<p>" + chosen[index].name + "</p>";
+        modal_cont += `
+        <div class="draggable" draggable="true">
+        <p>
+            <span class="circle ${chosen[index].class}"></span>
+                ${chosen[index].name}
+            </p>
+        </div>`;
 
         statistics += "" + chosen[index].name + "\n";
         colors.push(chosen[index].class);
@@ -1101,27 +1116,105 @@ function saveplan_mon() {
         setTimeout(function () { info.innerHTML = ""; }, 5000);
     }
 
-    let i = 0;
+    // Add a text field for adding new items dynamically
+    modal_cont += `
+    <div id="new-text-container">
+        <input type="text" id="new-text" placeholder="Lägg till fritext" />
+        <button id="add-text">Lägg till</button>
+    </div>`;
 
-    tekniker.forEach(element => {
-        if (element != "") {
-            savepass(element, group, date, colors[i])
-            i++;
-        }
-    });
+    modal_cont += `<button class="close">Spara pass</button>`;
 
+    // Set the modal content
+    modal_content.innerHTML = modal_cont;
 
-    modal_content.innerHTML = modal_cont + '<button class="close">Spara pass</button>';
+    let dragSrcEl = null;
 
-    let span = document.getElementsByClassName("close")[0];
+    // Add drag-and-drop listeners
+    function addDragAndDropListeners(element) {
+        element.addEventListener('dragstart', (e) => {
+            dragSrcEl = element;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', element.outerHTML);
+            element.classList.add('dragging');
+        });
 
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-        download_file(content, group, date);
+        element.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        });
+
+        element.addEventListener('drop', (e) => {
+            e.stopPropagation(); // Prevent browser redirection
+            const draggingElement = document.querySelector('.dragging');
+
+            if (draggingElement && draggingElement !== element) {
+                element.insertAdjacentElement('beforebegin', draggingElement);
+            }
+            draggingElement?.classList?.remove('dragging');
+        });
+
+        element.addEventListener('dragend', () => {
+            element.classList?.remove('dragging');
+        });
     }
 
+    // Attach listeners to all draggable elements
+    document.querySelectorAll('.draggable').forEach(addDragAndDropListeners);
+
+    let addButton = modal_content.querySelector('#add-text');
+
+    addButton.onclick = function () {
+        let freeTextInput = document.getElementById('new-text');
+        let textValue = freeTextInput.value.trim(); // Get and trim the value of the text box
+
+        if (textValue) {
+            // Create a new draggable <p> element
+            let newParagraph = document.createElement('div');
+            newParagraph.classList.add('draggable');
+            newParagraph.setAttribute('draggable', 'true');
+            newParagraph.innerHTML = `
+            <p>
+                <span class="circle text"></span> ${textValue}
+            </p>
+        `;
+
+            // Append the new <p> to the modal
+            modal_content.appendChild(newParagraph);
+
+            // Clear the text box
+            freeTextInput.value = '';
+
+            // Make the newly added element draggable
+            document.querySelectorAll('.draggable').forEach(addDragAndDropListeners);
+        }
+    };
+
+    let span = document.getElementsByClassName("close")[0];
+    span.onclick = function () {
+
+        modal.style.display = "none";
+
+        // Collect reordered content
+        content = "";
+        const allTexts = modal_content.querySelectorAll("p");
+        allTexts.forEach(el => {
+            content += el.innerText + "\n";
+        });
+
+        download_file(content, group, date);
+
+        let i = 0;
+
+        tekniker.forEach(element => {
+            if (element != "") {
+                savepass(element, group, date, colors[i])
+                i++;
+            }
+        });
+    };
 }
+
 
 function saveplan_kuy() {
 
@@ -1158,7 +1251,6 @@ function saveplan_kuy() {
 
     console.log(chosen);
 
-    let content = "";
     let modal_cont = "";
 
     let statistics = "";
@@ -1166,59 +1258,18 @@ function saveplan_kuy() {
     let date = document.getElementById("kuy_plan_date");
     date = date.value;
 
-    content += "5:e kuy: \n";
-    modal_cont += '<h2 style="color: rgb(255, 235, 10)">5:e kuy:</h2>';
-
-
-    let orange = true;
-    let green = true;
-    let blue = true;
-    let brown = true;
-    let all = true;
-
     for (let index = 0; index < chosen.length; index++) {
 
-        if (chosen[index].class == "orange" && orange) {
-            content += "\n4e kuy: \n";
-            modal_cont += '<h2 style="color: rgb(253, 117, 33)">4e kuy:</h2>';
-            orange = false;
-        }
-
-        if (chosen[index].class == "green" && green) {
-            content += "\n3:e kuy: \n";
-            modal_cont += '<h2 style="color: rgb(64, 119, 90)">3e kuy:</h2>';
-            green = false;
-        }
-
-        if (chosen[index].class == "blue" && blue) {
-            content += "\n2:a kuy: \n";
-            modal_cont += '<h2 style="color: rgb(52, 89, 149)">2a kuy:</h2>';
-
-            blue = false;
-        }
-
-        if (chosen[index].class == "brown" && brown) {
-            content += "\n1:a kuy: \n";
-            modal_cont += '<h2 style="color: rgb(72, 39, 40)">1:a kuy:</h2>';
-
-            brown = false;
-        }
-
-
-        if (chosen[index].class == "all" && all) {
-            content += "\nGrundläggande tekniker: \n";
-            modal_cont += '<h2 style="color: #D474BE">Grundläggande tekniker: </h2>';
-
-            all = false;
-        }
-
-        content += "" + chosen[index].name + "\n";
-        modal_cont += "<p>" + chosen[index].name + "</p>";
+        modal_cont += `
+        <div class="draggable" draggable="true">
+        <p>
+            <span class="circle ${chosen[index].class}"></span>
+                ${chosen[index].name}
+            </p>
+        </div>`;
 
         statistics += "" + chosen[index].name + "\n";
         colors.push(chosen[index].class);
-
-
     }
 
     let tekniker = statistics.split('\n');
@@ -1233,26 +1284,106 @@ function saveplan_kuy() {
         setTimeout(function () { info.innerHTML = ""; }, 5000);
     }
 
-    let i = 0;
+    // Add a text field for adding new items dynamically
+    modal_cont += `
+    <div id="new-text-container">
+        <input type="text" id="new-text" placeholder="Lägg till fritext" />
+        <button id="add-text">Lägg till</button>
+    </div>`;
 
-    tekniker.forEach(element => {
-        if (element != "") {
-            savepass(element, group, date, colors[i])
-            i++;
-        }
-    });
+    modal_cont += `<button class="close">Spara pass</button>`;
 
-    modal_content.innerHTML = modal_cont + '<button class="close">Spara pass</button>';
+    // Set the modal content
+    modal_content.innerHTML = modal_cont;
 
-    let span = document.getElementsByClassName("close")[0];
+    let dragSrcEl = null;
 
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-        download_file(content, group, date);
+    // Add drag-and-drop listeners
+    function addDragAndDropListeners(element) {
+        element.addEventListener('dragstart', (e) => {
+            dragSrcEl = element;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', element.outerHTML);
+            element.classList.add('dragging');
+        });
+
+        element.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        });
+
+        element.addEventListener('drop', (e) => {
+            e.stopPropagation(); // Prevent browser redirection
+            const draggingElement = document.querySelector('.dragging');
+
+            if (draggingElement && draggingElement !== element) {
+                element.insertAdjacentElement('beforebegin', draggingElement);
+            }
+            draggingElement?.classList?.remove('dragging');
+        });
+
+        element.addEventListener('dragend', () => {
+            element.classList?.remove('dragging');
+        });
     }
 
+    // Attach listeners to all draggable elements
+    document.querySelectorAll('.draggable').forEach(addDragAndDropListeners);
+
+    let addButton = modal_content.querySelector('#add-text');
+
+    addButton.onclick = function () {
+        let freeTextInput = document.getElementById('new-text');
+        let textValue = freeTextInput.value.trim(); // Get and trim the value of the text box
+
+        if (textValue) {
+            // Create a new draggable <p> element
+            let newParagraph = document.createElement('div');
+            newParagraph.classList.add('draggable');
+            newParagraph.setAttribute('draggable', 'true');
+            newParagraph.innerHTML = `
+            <p>
+                <span class="circle text"></span> ${textValue}
+            </p>
+        `;
+
+            // Append the new <p> to the modal
+            modal_content.appendChild(newParagraph);
+
+            // Clear the text box
+            freeTextInput.value = '';
+
+            // Make the newly added element draggable
+            document.querySelectorAll('.draggable').forEach(addDragAndDropListeners);
+        }
+    };
+
+    let span = document.getElementsByClassName("close")[0];
+    span.onclick = function () {
+
+        modal.style.display = "none";
+
+        // Collect reordered content
+        content = "";
+        const allTexts = modal_content.querySelectorAll("p");
+        allTexts.forEach(el => {
+            content += el.innerText + "\n";
+        });
+
+        download_file(content, group, date);
+
+        let i = 0;
+
+        tekniker.forEach(element => {
+            if (element != "") {
+                savepass(element, group, date, colors[i])
+                i++;
+            }
+        });
+    };
 }
+
+
 
 
 function delete_old_pass() {
@@ -1293,3 +1424,11 @@ function delete_old_pass() {
 
     }
 }
+
+const toggle = document.getElementById("menu-toggle");
+const links = document.getElementById("menu-links");
+
+toggle.addEventListener("click", () => {
+    links.classList.toggle("show");
+});
+
