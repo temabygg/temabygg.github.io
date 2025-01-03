@@ -14,6 +14,8 @@ body {
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
 }
 
 main {
@@ -584,6 +586,19 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
+@media print {
+    body {
+        visibility: hidden;
+    }
+
+    .modal-content {
+        visibility: visible;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
+
 @media (max-width: 768px) {
 
     /* Prevent horizontal scrolling globally */
@@ -637,7 +652,7 @@ input[type="checkbox"] {
         flex-direction: column;
         /* Stack links vertically */
         align-items: center;
-        padding: 10px;
+        padding: 5px;
     }
 
     nav a {
@@ -705,10 +720,62 @@ input[type="checkbox"] {
 
 @media (max-width: 480px) {
 
+    /* Dropdown styling for mobile */
+    @media (max-width: 768px) {
+        #dropdown {
+            /* Make the dropdown take the full width */
+        }
+
+        #dropdown-content {
+            position: static;
+            /* Remove absolute positioning */
+            display: none;
+            /* Initially hidden */
+            background-color: white;
+            /* Ensure background remains clean */
+            width: 100%;
+            /* Full width for mobile */
+            box-shadow: none;
+            /* Remove shadow for a cleaner mobile look */
+            padding: 12px 0;
+            /* Add spacing inside */
+            border-top: 1px solid #ccc;
+            /* Optional: add a separator line */
+        }
+
+        #dropdown.open #dropdown-content {
+            display: block;
+            /* Show when dropdown is open */
+        }
+
+        #dropdown-content a {
+            padding: 2px;
+            font-size: 13px;
+            /* Add space for easier tapping */
+            text-align: center;
+            /* Center-align text for mobile */
+        }
+
+        #dropy {
+            width: 100%;
+            /* Full-width button */
+            text-align: center;
+            /* Center-align text */
+            padding: 15px 0;
+            /* Add space for easier tapping */
+            font-size: 16px;
+            /* Larger font for mobile */
+        }
+    }
+
     /* For mobile phones */
     /* Navigation Bar Tweaks */
     nav {
         padding: 10px 5px;
+    }
+
+    nav div {
+        padding: 5px;
     }
 
     nav a {
@@ -774,7 +841,8 @@ input[type="checkbox"] {
         /* Prevent buttons from getting too wide */
         font-size: 12px;
         /* Adjust font size */
-        padding: 8px 12px;
+        padding: 5px 5px;
+        margin: 0px;
         /* Add better padding */
     }
 }
@@ -794,10 +862,11 @@ input[type="checkbox"] {
     .options button,
     .options input,
     .searches button,
-    .searches input {
+    .searches input,
+    #search_field {
         width: 90%;
         /* Buttons take up most of the screen */
-        font-size: 14px;
+        font-size: 12px;
         /* Slightly larger font size for smaller screens */
     }
 }
@@ -810,8 +879,41 @@ input[type="checkbox"] {
     #delete_chosen {
         font-size: 12px;
         /* Reduce font size for smaller screens */
-        padding: 6px 10px;
+        padding: 10px 10px;
+        margin-top: 0px;
         /* Adjust padding */
+    }
+
+    .group,
+    .thisdate,
+    #search_field,
+    #search_button,
+    #clear_button,
+    #create,
+    #group,
+    #get_group_button,
+    #mon_plan_date,
+    .date {
+        margin-top: 2px;
+        padding-top: 2px;
+    }
+
+    .group option {
+        font-size: 11px;
+    }
+
+    #statistics_button,
+    #stat_group,
+    #stat_pass_group,
+    #statistics_pass_button,
+    #delete_chosen {
+        margin-top: 0px;
+    }
+
+    #stat_pass_group,
+    #statistics_pass_button,
+    #delete_chosen {
+        margin-top: 0px;
     }
 }
 

@@ -161,7 +161,7 @@ function createFile_kuy() {
 
     chosen.sort((a, b) => (a.class < b.class) ? 1 : ((b.class < a.class) ? -1 : 0))
 
-    let modal_cont = "";
+    let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt, samt spara passet i historiken och som en nedladdningsbar textfil.</h6><br>";
 
     let statistics = "";
     let colors = [];
@@ -270,6 +270,16 @@ function createFile_kuy() {
 
     let span = document.getElementsByClassName("close")[0];
     span.onclick = function () {
+
+        const div = document.querySelector('.modal-content');
+        for (let i = div.children.length - 1; i >= 0; i--) {
+            const child = div.children[i];
+            if (child.className.toLowerCase() !== 'draggable') {
+                div.removeChild(child);
+            }
+        }
+
+        window.print()
 
         modal.style.display = "none";
 
@@ -780,7 +790,7 @@ function createFile_mon() {
 
     chosen.sort((a, b) => (a.class < b.class) ? 1 : ((b.class < a.class) ? -1 : 0))
 
-    let modal_cont = "";
+    let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt, samt spara passet i historiken och som en nedladdningsbar textfil.</h6><br>";
     let statistics = "";
     let colors = [];
     let date = document.getElementById("mon_date");
@@ -888,6 +898,16 @@ function createFile_mon() {
 
     let span = document.getElementsByClassName("close")[0];
     span.onclick = function () {
+
+        const div = document.querySelector('.modal-content');
+        for (let i = div.children.length - 1; i >= 0; i--) {
+            const child = div.children[i];
+            if (child.className.toLowerCase() !== 'draggable') {
+                div.removeChild(child);
+            }
+        }
+
+        window.print()
 
         modal.style.display = "none";
 
@@ -1083,7 +1103,7 @@ function saveplan_mon() {
 
     chosen.sort((a, b) => (a.class < b.class) ? 1 : ((b.class < a.class) ? -1 : 0))
 
-    let modal_cont = "";
+    let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt, samt spara passet i historiken och som en nedladdningsbar textfil.</h6><br>";
 
     let statistics = "";
     let colors = [];
@@ -1129,6 +1149,8 @@ function saveplan_mon() {
     modal_content.innerHTML = modal_cont;
 
     let dragSrcEl = null;
+    let touchStartY = 0;
+    let isTouchDragging = false;
 
     // Add drag-and-drop listeners
     function addDragAndDropListeners(element) {
@@ -1157,10 +1179,52 @@ function saveplan_mon() {
         element.addEventListener('dragend', () => {
             element.classList?.remove('dragging');
         });
+
+        element.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+            dragSrcEl = element;
+            isTouchDragging = true;
+
+            // Add a visual dragging indicator
+            element.classList.add('dragging');
+        });
+
+        element.addEventListener('touchmove', (e) => {
+            if (!isTouchDragging) return;
+
+            const touchCurrentY = e.touches[0].clientY;
+
+            // Detect the element the finger is over
+            const elementBelow = document.elementFromPoint(
+                e.touches[0].clientX,
+                e.touches[0].clientY
+            );
+
+            const targetDraggable = elementBelow?.closest('.draggable');
+
+            if (
+                targetDraggable &&
+                targetDraggable !== dragSrcEl &&
+                targetDraggable !== dragSrcEl.nextSibling
+            ) {
+                // Move the dragged element above the target element
+                targetDraggable.insertAdjacentElement('beforebegin', dragSrcEl);
+            }
+
+            e.preventDefault(); // Prevent scrolling while dragging
+        });
+
+        element.addEventListener('touchend', () => {
+            if (isTouchDragging) {
+                isTouchDragging = false;
+                dragSrcEl?.classList?.remove('dragging');
+            }
+        });
     }
 
     // Attach listeners to all draggable elements
     document.querySelectorAll('.draggable').forEach(addDragAndDropListeners);
+
 
     let addButton = modal_content.querySelector('#add-text');
 
@@ -1193,6 +1257,16 @@ function saveplan_mon() {
     let span = document.getElementsByClassName("close")[0];
     span.onclick = function () {
 
+        const div = document.querySelector('.modal-content');
+        for (let i = div.children.length - 1; i >= 0; i--) {
+            const child = div.children[i];
+            if (child.className.toLowerCase() !== 'draggable') {
+                div.removeChild(child);
+            }
+        }
+
+        window.print()
+
         modal.style.display = "none";
 
         // Collect reordered content
@@ -1201,6 +1275,8 @@ function saveplan_mon() {
         allTexts.forEach(el => {
             content += el.innerText + "\n";
         });
+
+
 
         download_file(content, group, date);
 
@@ -1251,7 +1327,7 @@ function saveplan_kuy() {
 
     console.log(chosen);
 
-    let modal_cont = "";
+    let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt, samt spara passet i historiken och som en nedladdningsbar textfil.</h6><br>";
 
     let statistics = "";
     let colors = [];
@@ -1360,6 +1436,15 @@ function saveplan_kuy() {
 
     let span = document.getElementsByClassName("close")[0];
     span.onclick = function () {
+        const div = document.querySelector('.modal-content');
+        for (let i = div.children.length - 1; i >= 0; i--) {
+            const child = div.children[i];
+            if (child.className.toLowerCase() !== 'draggable') {
+                div.removeChild(child);
+            }
+        }
+
+        window.print()
 
         modal.style.display = "none";
 
@@ -1369,6 +1454,7 @@ function saveplan_kuy() {
         allTexts.forEach(el => {
             content += el.innerText + "\n";
         });
+
 
         download_file(content, group, date);
 
