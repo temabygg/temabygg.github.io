@@ -138,6 +138,7 @@
 
             const querySnapshot = await getDocs(q);
 
+
             querySnapshot.forEach((doc) => {
 
                 deleteDoc(doc.ref);

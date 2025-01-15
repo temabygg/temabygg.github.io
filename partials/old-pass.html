@@ -32,8 +32,20 @@
     <button id="statistics_pass_button" onclick="find_pass()">Visa pass</button>
 
     <button id="delete_chosen" onclick="delete_old_pass()">Radera valda tekniker från passet</button>
+
+    <button id="recreate_chosen" onclick="recreate_old_pass()">Återskapa passet</button>
+
+    <div class="date">
+        <input type="date" class="thisdate" id="recreate_pass_date" name="date" value="2024-08-01" min="2024-01-01"
+            max="2030-12-31" />
+    </div>
 </div>
 <p id="info"></p>
 
+<div class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+    </div>
+</div>
 
 <div id="results"></div>
