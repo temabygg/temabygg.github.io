@@ -1675,6 +1675,153 @@ function recreate_old_pass() {
 
 }
 
+function print_pass() {
+
+    let start = document.getElementById("stat_pass_date");
+    let finddate = start.value;
+
+    let date = document.getElementById("recreate_pass_date");
+    date = date.value;
+
+    let gr = document.getElementById("stat_pass_group");
+    let group = gr.value;
+
+    getpass(finddate, group).then(function (reply) {
+
+        const mp = new Map(reply.map(o => [o.teknik, { ...o, count: 0 }]));
+        for (const { teknik } of reply) mp.get(teknik).count++;
+        let result = Array.from(mp.values());
+
+        console.log(result);
+
+
+        result.sort((a, b) => (a.color < b.color) ? 1 : ((b.color < a.color) ? -1 : 0))
+
+        let modal = document.getElementsByClassName("modal")[0];
+        let modal_content = document.getElementsByClassName("modal-content")[0];
+        modal.style.display = "block";
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt, samt spara passet i historiken och som en nedladdningsbar textfil.</h6><br>";
+        let statistics = "";
+        let colors = [];
+
+        for (let index = 0; index < result.length; index++) {
+
+            modal_cont += `
+        <div class="draggable" draggable="true">
+        <p>
+            <span class="circle ${result[index].color}"></span>
+                ${result[index].teknik}
+            </p>
+        </div>`;
+
+            statistics += "" + result[index].teknik + "\n";
+            colors.push(result[index].color);
+        }
+
+        let tekniker = statistics.split('\n');
+
+        // Add a text field for adding new items dynamically
+        modal_cont += `
+    <div id="new-text-container">
+        <input type="text" id="new-text" placeholder="Lägg till fritext" />
+        <button id="add-text">Lägg till</button>
+    </div>`;
+
+        modal_cont += `<button class="close">Skriv ut</button>`;
+
+        // Set the modal content
+        modal_content.innerHTML = modal_cont;
+
+        let dragSrcEl = null;
+
+        // Add drag-and-drop listeners
+        function addDragAndDropListeners(element) {
+            element.addEventListener('dragstart', (e) => {
+                dragSrcEl = element;
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/html', element.outerHTML);
+                element.classList.add('dragging');
+            });
+
+            element.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+            });
+
+            element.addEventListener('drop', (e) => {
+                e.stopPropagation(); // Prevent browser redirection
+                const draggingElement = document.querySelector('.dragging');
+
+                if (draggingElement && draggingElement !== element) {
+                    element.insertAdjacentElement('beforebegin', draggingElement);
+                }
+                draggingElement?.classList?.remove('dragging');
+            });
+
+            element.addEventListener('dragend', () => {
+                element.classList?.remove('dragging');
+            });
+        }
+
+        // Attach listeners to all draggable elements
+        document.querySelectorAll('.draggable').forEach(addDragAndDropListeners);
+
+        let addButton = modal_content.querySelector('#add-text');
+
+        addButton.onclick = function () {
+            let freeTextInput = document.getElementById('new-text');
+            let textValue = freeTextInput.value.trim(); // Get and trim the value of the text box
+
+            if (textValue) {
+                // Create a new draggable <p> element
+                let newParagraph = document.createElement('div');
+                newParagraph.classList.add('draggable');
+                newParagraph.setAttribute('draggable', 'true');
+                newParagraph.innerHTML = `
+            <p>
+                <span class="circle text"></span> ${textValue}
+            </p>
+        `;
+
+                // Append the new <p> to the modal
+                modal_content.appendChild(newParagraph);
+
+                // Clear the text box
+                freeTextInput.value = '';
+
+                // Make the newly added element draggable
+                document.querySelectorAll('.draggable').forEach(addDragAndDropListeners);
+            }
+        };
+
+        let span = document.getElementsByClassName("close")[0];
+        span.onclick = function () {
+
+            const div = document.querySelector('.modal-content');
+            for (let i = div.children.length - 1; i >= 0; i--) {
+                const child = div.children[i];
+                if (child.className.toLowerCase() !== 'draggable') {
+                    div.removeChild(child);
+                }
+            }
+
+            window.print()
+
+            modal.style.display = "none";
+        };
+
+    });
+
+}
+
 const toggle = document?.getElementById("menu-toggle");
 const links = document?.getElementById("menu-links");
 

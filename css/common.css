@@ -371,7 +371,8 @@ label {
 #stat_pass_group,
 #statistics_pass_button,
 #delete_chosen,
-#recreate_chosen {
+#recreate_chosen,
+#print_chosen {
     margin-top: 30px;
 }
 
@@ -590,6 +591,12 @@ input[type="checkbox"] {
 @media print {
     body {
         visibility: hidden;
+    }
+
+    html,
+    body {
+        height: 100%;
+        overflow: hidden;
     }
 
     .modal-content {
@@ -878,7 +885,8 @@ input[type="checkbox"] {
     button,
     .group,
     #delete_chosen,
-    #recreate_chosen {
+    #recreate_chosen,
+    #print_chosen {
         font-size: 12px;
         /* Reduce font size for smaller screens */
         padding: 10px 10px;
@@ -909,14 +917,16 @@ input[type="checkbox"] {
     #stat_pass_group,
     #statistics_pass_button,
     #delete_chosen,
-    #recreate_chosen {
+    #recreate_chosen,
+    #print_chosen {
         margin-top: 0px;
     }
 
     #stat_pass_group,
     #statistics_pass_button,
     #delete_chosen,
-    #recreate_chosen {
+    #recreate_chosen,
+    #print_chosen {
         margin-top: 0px;
     }
 }
@@ -925,7 +935,8 @@ input[type="checkbox"] {
 
 
     #delete_chosen,
-    #recreate_chosen {
+    #recreate_chosen,
+    #print_chosen {
         width: 90%;
         /* Ensure button fits within small screens */
         font-size: 12px;
