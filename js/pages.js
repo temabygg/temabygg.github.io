@@ -1,3 +1,5 @@
+const { log } = require("console");
+
 function setDate() {
     let dates = document.getElementsByClassName('thisdate');
 
@@ -1343,10 +1345,21 @@ function saveplan_kuy() {
 
     for (let index = 0; index < chosen.length; index++) {
 
+        let num = "";
+        if (chosen[index].class == "blackone") {
+            num = "1"
+        }
+        if (chosen[index].class == "blacktwo") {
+            num = "2"
+        }
+        if (chosen[index].class == "blackthree") {
+            num = "3"
+        }
+
         modal_cont += `
         <div class="draggable" draggable="true">
         <p>
-            <span class="circle ${chosen[index].class}"></span>
+            <span class="circle ${chosen[index].class}">${num}</span>
                 ${chosen[index].name}
             </p>
         </div>`;
