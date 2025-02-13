@@ -34,13 +34,7 @@ function listen_click() {
                 if (td.classList[0].startsWith("brown")) {
                     td.style.backgroundColor = td.style.backgroundColor === 'rgba(72, 39, 40, 0.7)' ? 'rgba(255, 255, 255, 1)' : 'rgba(72, 39, 40, 0.7)';
                 }
-                if (td.classList[0].startsWith("blackone")) {
-                    td.style.backgroundColor = td.style.backgroundColor === 'rgba(77, 77, 77, 0.7)' ? 'rgba(255, 255, 255, 1)' : 'rgba(77, 77, 77, 0.7)';
-                }
-                if (td.classList[0].startsWith("blacktwo")) {
-                    td.style.backgroundColor = td.style.backgroundColor === 'rgba(26, 26, 26, 0.7)' ? 'rgba(255, 255, 255, 1)' : 'rgba(26, 26, 26, 0.7)';
-                }
-                if (td.classList[0].startsWith("blackthree")) {
+                if (td.classList[0].startsWith("black")) {
                     td.style.backgroundColor = td.style.backgroundColor === 'rgba(0, 0, 0, 0.7)' ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 0.7)';
                 }
                 if (td.classList[0].startsWith("al")) {
@@ -95,14 +89,7 @@ function listen_click_plan() {
                 if (tr.children[1].classList[0] == "brown") {
                     tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(72, 39, 40)' ? 'rgb(255, 255, 255)' : 'rgb(72, 39, 40)';
                 }
-
-                if (tr.children[1].classList[0] == "blackone") {
-                    tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(77, 77, 77)' ? 'rgb(255, 255, 255)' : 'rgb(77, 77, 77)';
-                }
-                if (tr.children[1].classList[0] == "blacktwo") {
-                    tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(26, 26, 26)' ? 'rgb(255, 255, 255)' : 'rgb(26, 26, 26)';
-                }
-                if (tr.children[1].classList[0] == "blackthree") {
+                if (tr.children[1].classList[0].startsWith("black")) {
                     tr.children[3].style.backgroundColor = tr.children[3].style.backgroundColor === 'rgb(0, 0, 0)' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)';
                 }
                 if (tr.children[1].classList[0] == "all") {
@@ -502,7 +489,10 @@ function fill_result(reply, pass_count) {
 
         HTML += '<tr>';
 
-        if (element.group == "V2" || element.group == "V1" || element.group == "S1") {
+        if (element.group == "V2" || element.group == "V1" || element.group == "S1" || element.group == "Test") {
+
+            console.log(element.color);
+
 
             if (element.color == 'yellow') {
                 HTML += '<td style="background-color: rgb(255, 235, 10);color: rgb(255, 235, 10);border: 1px solid #24292e38;">.</td>'
@@ -535,19 +525,19 @@ function fill_result(reply, pass_count) {
                     HTML += '<tr><td></td><td></td><td></td></tr>'
                     blackone = false;
                 }
-                HTML += '<td style="background-color: rgb(77, 77, 77);color: rgb(77, 77, 77);border: 1px solid #24292e38;">.</td>'
+                HTML += '<td style="background: black; background-image: linear-gradient(yellow, yellow); background-repeat: no-repeat; background-position: center 50%; background-size: 100% 5px;">.</td>'
             } else if (element.color == 'blacktwo') {
                 if (blacktwo) {
                     HTML += '<tr><td></td><td></td><td></td></tr>'
                     blacktwo = false;
                 }
-                HTML += '<td style="background-color: rgb(26, 26, 26);color: rgb(26, 26, 26);border: 1px solid #24292e38;">.</td>'
+                HTML += '<td style="background: black; background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%; background-size: 100% 5px, 100% 5px;">.</td>'
             } else if (element.color == 'blackthree') {
                 if (blackthree) {
                     HTML += '<tr><td></td><td></td><td></td></tr>'
                     blackthree = false;
                 }
-                HTML += '<td style="background-color: rgb(0, 0, 0);color: rgb(0, 0, 0);border: 1px solid #24292e38;">.</td>'
+                HTML += '<td style="background: black; background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow); background-repeat: no-repeat, no-repeat, no-repeat; background-position: center 25%, center 50%, center 75%; background-size: 100% 5px, 100% 5px, 100% 5px; ">.</td>'
             }
 
         } else {
@@ -638,7 +628,7 @@ function fill_result_old_pass(reply, pass_count) {
 
         HTML += '<tr>';
 
-        if (element.group == "V2" || element.group == "V1" || element.group == "S1") {
+        if (element.group == "V2" || element.group == "V1" || element.group == "S1" || element.group == "Test") {
 
             if (element.color == 'yellow') {
                 HTML += '<td style="background-color: rgb(255, 235, 10);color: rgb(255, 235, 10);border: 1px solid #24292e38;">.</td>'
@@ -672,19 +662,19 @@ function fill_result_old_pass(reply, pass_count) {
                     HTML += '<tr><td></td><td></td><td></td></tr>'
                     blackone = false;
                 }
-                HTML += '<td style="background-color: rgb(77, 77, 77);color: rgb(77, 77, 77);border: 1px solid #24292e38;">.</td>'
+                HTML += '<td style="background: black; background-image: linear-gradient(yellow, yellow); background-repeat: no-repeat; background-position: center 50%; background-size: 100% 5px;">.</td>'
             } else if (element.color == 'blacktwo') {
                 if (blacktwo) {
                     HTML += '<tr><td></td><td></td><td></td></tr>'
                     blacktwo = false;
                 }
-                HTML += '<td style="background-color: rgb(26, 26, 26);color: rgb(26, 26, 26);border: 1px solid #24292e38;">.</td>'
+                HTML += '<td style="background: black; background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%; background-size: 100% 5px, 100% 5px;">.</td>'
             } else if (element.color == 'blackthree') {
                 if (blackthree) {
                     HTML += '<tr><td></td><td></td><td></td></tr>'
                     blackthree = false;
                 }
-                HTML += '<td style="background-color: rgb(0, 0, 0);color: rgb(0, 0, 0);border: 1px solid #24292e38;">.</td>'
+                HTML += '<td style="background: black; background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow); background-repeat: no-repeat, no-repeat, no-repeat; background-position: center 25%, center 50%, center 75%; background-size: 100% 5px, 100% 5px, 100% 5px; ">.</td>'
             }
 
         } else {
