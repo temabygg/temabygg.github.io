@@ -672,6 +672,13 @@ function fill_result_old_pass(reply, pass_count) {
                 }
                 HTML += '<td style="background: black; background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow); background-repeat: no-repeat, no-repeat, no-repeat; background-position: center 25%, center 50%, center 75%; background-size: 100% 5px, 100% 5px, 100% 5px; ">.</td>'
             }
+            else if (element.color == 'all') {
+                if (all) {
+                    HTML += '<tr><td></td><td></td><td></td></tr>'
+                    all = false;
+                }
+                HTML += '<td style="background-color: rgb(212, 116, 190);color: rgb(212, 116, 190);border: 1px solid #24292e38;">.</td>'
+            }
 
         } else {
 
