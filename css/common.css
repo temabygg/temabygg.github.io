@@ -593,18 +593,16 @@ input[type="checkbox"] {
 }
 
 @media print {
-    body {
+    body * {
         visibility: hidden;
     }
 
-    html,
-    body {
-        height: 100%;
-        overflow: hidden;
+    .modal-content * {
+        visibility: visible;
     }
 
-    .modal-content {
-        visibility: visible;
+    .modal {
+        overflow: visible;
         position: absolute;
         left: 0;
         top: 0;

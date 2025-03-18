@@ -1,5 +1,3 @@
-const { log } = require("console");
-
 function setDate() {
     let dates = document.getElementsByClassName('thisdate');
 
@@ -285,8 +283,6 @@ function createFile_kuy() {
         allTexts.forEach(el => {
             content += el.innerText + "\n";
         });
-
-        download_file(content, group, date);
 
         let i = 0;
 
@@ -917,9 +913,6 @@ function createFile_mon() {
             content += el.innerText + "\n";
         });
 
-        download_file(content, group, date);
-
-
         let i = 0;
 
         tekniker.forEach(element => {
@@ -932,20 +925,6 @@ function createFile_mon() {
     };
 
 }
-
-function download_file(content, group, date) {
-    let file = new File(["\ufeff" + content], `${group}_${date}.txt`, { type: "text/plain:charset=UTF-8" });
-
-    url = window.URL.createObjectURL(file);
-
-    let a = document.createElement("a");
-    a.style = "display: none";
-    a.href = url;
-    a.download = file.name;
-    a.click();
-    window.URL.revokeObjectURL(url);
-}
-
 
 
 function search_mon() {
@@ -1275,10 +1254,6 @@ function saveplan_mon() {
             content += el.innerText + "\n";
         });
 
-
-
-        download_file(content, group, date);
-
         let i = 0;
 
         tekniker.forEach(element => {
@@ -1464,9 +1439,6 @@ function saveplan_kuy() {
         allTexts.forEach(el => {
             content += el.innerText + "\n";
         });
-
-
-        download_file(content, group, date);
 
         let i = 0;
 
