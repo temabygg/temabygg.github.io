@@ -1,3 +1,4 @@
+
 function setDate() {
     let dates = document.getElementsByClassName('thisdate');
 
@@ -417,6 +418,2728 @@ function get_group_statistics() {
     }
 
 }
+function get_group_overview() {
+    let sel = document.getElementById("overview_group")
+    let group = sel.value;
+
+    if (group == "") {
+        let info = document.getElementById("info");
+        info.innerHTML = 'Du behöver välja grupp om du vill hämta statistiken.'
+
+        setTimeout(function () { info.innerHTML = ""; }, 5000);
+    } else {
+
+        if (group == "V2" || group == "V1" || group == "S1" || group == "Test") {
+            let HTML = `
+<table id="plan_table" class="overview-table">
+    <tr>
+        <th></th>
+        <th colspan="2">KIHON WAZA</th>
+        <th></th>
+    </tr>
+    <tr>
+        <th></th>
+        <th>ATEMI WAZA</th>
+        <th>TOTALT</th>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+
+        <td class="yellow">1. Shotei uchi, jodan, rak stöt med främre och bakre handen</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+
+        <td class="yellow">2. Shotei uchi, chudan, rak stöt med främre och bakre handen</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+
+        <td class="yellow ">3. Gedan geri, rak spark med främre och bakre benet</td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+
+        <td class="orange">1. Mawashi shotei uchi, jodan, cirkulär stöt med bakre handen</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+
+        <td class="orange">2. Chudan tski, stöt snett uppåt med bakre handen</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+
+        <td class="orange">3. Hiza geri, chudan, rak knästöt med bakre benet</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#40775A;"></td>
+        <td class="green">1. Mawashi seiken tski, jodan, cirkulärt slag med främre och bakre handen</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#40775A;"></td>
+        <td class="green">2. Kin geri, gedan, spark snett uppåt med främre och bakre benet</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#40775A;"></td>
+        <td class="green">3. Mae geri, chudan, rak spark med främre och bakre benet</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#345995;"></td>
+        <td class="blue">1. Seiken tski, jodan, rakt slag med främre och bakre handen</td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color:#345995;"></td>
+        <td class="blue">2. Seiken tski, chudan, rakt slag med främre och bakre handen</td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color:#345995;"></td>
+        <td class="blue">3. Mawashi geri, gedan, cirkulär spark med främre och bakre benet</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#345995;"></td>
+        <td class="blue">4. Mawashi geri, chudan, cirkulär spark med främre och bakre benet</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#482728;"></td>
+        <td class="brown">1. Empi uchi, jodan, cirkulär stöt med främre och bakre armen</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color:#482728;"></td>
+        <td class="brown">2. Empi uchi, chudan, rak stöt åt sidan med närmaste armen</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#482728;"></td>
+        <td class="brown">3. Kakato geri, chudan, rak spark med bakre benet</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#482728;"></td>
+        <td class="brown">4. Yoko geri, chudan, rak spark åt sidan med närmaste benet</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <th></th>
+        <th>KANSETSU WAZA</th>
+        <th>TOTALT</th>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">1. O soto osae, utan grepp, nedläggning snett bakåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">1. Kote gaeshi, grepp i handleden, nedläggning snett framåt
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">1. Kote gaeshi, grepp i handleden, nedläggning snett bakåt
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">1. Ude osae, grepp i kragen med tryck, nedläggning framåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#40775A;"></td>
+        <td class="green">2. Ude osae, i rörelse, cirkulär nedläggning</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">1. Irimi nage, grepp i handleden, nedläggning snett bakåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#345995;"></td>
+        <td class="blue">2. Irimi nage, i rörelse, nedläggning snett framåt</td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">1. Waki gatame, grepp i handleden, nedläggning snett bakåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#482728;"></td>
+        <td class="brown">2. Kote mawashi, grepp i kragen med tryck, nedläggning snett framåt</td>
+        <td></td>
+    </tr>
+    <tr>
+
+        <th></th>
+        <th>NAGE WAZA</th>
+        <th>TOTALT</th>
+    </tr>
+
+    <tr>
+
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">1. Koshi otoshi, utan grepp, nedläggning snett bakåt
+        </td>
+        <td></td>
+
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">1. Uki otoshi, i rörelse, nedläggning snett framåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#40775A;"></td>
+        <td class="green">1. O soto otoshi, utan grepp, nedläggning snett bakåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">2. O soto otoshi, grepp i kragen med drag, nedläggning snett bakåt</td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">1. O goshi, utan grepp, kast snett framåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">2. Tai guruma, utan grepp, nedläggning snett framåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">1. Harai goshi, utan grepp, kast snett framåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">2. Harai goshi, i rörelse, kast snett framåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">3. Sukui nage, utan grepp, kast snett framåt</td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">4. Ko uchi gari, utan grepp, kast snett bakåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <th></th>
+        <th>JIGO WAZA</th>
+        <th>TOTALT</th>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+
+        <td class="yellow">1. Grepp i två handleder framifrån - Frigöring</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+
+        <td class="yellow">2. Grepp i två handleder bakifrån - Frigöring</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+
+        <td class="yellow">3. Grepp i håret bakifrån - Tettsui uchi, frigöring</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+
+        <td class="yellow">4. Försök till stryptag framifrån - Jodan soto uke</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+
+        <td class="yellow">5. Stryptag framifrån - Kawashi, frigöring</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+
+        <td class="yellow">6. Stryptag bakifrån - Maesabaki, kawashi, frigöring</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+
+        <td class="yellow">7. Stryptag med armen - Maesabaki, kuzure ude osae, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+
+        <td class="yellow">8. Försök till kravattgrepp från sidan - Jodan chikai uke, kawashi, koshi otoshi, ude
+            henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">9. Grepp i ärmen med drag - O soto osae, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">10. Livtag under armarna framifrån - Tate hishigi, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">11. Stryptag mot liggande sittande vid sidan - Frigöring, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">12. Hotfullt närmande mot liggande - Uppgång bakåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">13. Hotfullt närmande - Hejda med tryck
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">14. Kort svingslag - Jodan chikai uke, kawashi, koshi otoshi, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">15. Långt svingslag - Morote jodan uke, o soto osae, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">16. Påkslag mot huvudet - Ju morote jodan uke</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">17. Påkslag mot huvudet, backhand - Ju morote jodan uke</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">18. Knivhot mot magen - Grepp, shotei uchi jodan</td>
+        <td></td>
+    </tr>
+
+
+
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">1. Grepp i en handled framifrån
+            med två händer med drag - Frigöring</td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">2. Grepp i två handleder
+            bakifrån - Kote gaeshi, ude hishigi hiza gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">3. Grepp i håret framifrån - Frigöring</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">4. Försök till stryptag framifrån - Uki otoshi, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">5. Stryptag framifrån mot vägg - Tsuri komi</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">6. Kravattgrepp från sidan - Ushiro osae, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">7. Grepp om nacken och en knästöt - Gedan juji uke, kawashi, frigöring</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#FD7521;"></td>
+        <td class="orange">8. Försök till grepp i kläderna - Chudan soto uke, koshi otoshi, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#FD7521;"></td>
+        <td class="orange">9. Grepp i kläderna med tryck - Kuzure ude garami, ushiro osae, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color:#FD7521;"></td>
+        <td class="orange">10. Stryptag mot liggande sittande mellan benen - Frigöring, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#FD7521;"></td>
+        <td class="orange">11. Långt svingslag - Ju jodan uchi uke, uki otoshi, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#FD7521;"></td>
+        <td class="orange">12. Rak spark mot magen - Gedan uchi uke, koshi otoshi, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#FD7521;"></td>
+        <td class="orange">13. Påkslag mot huvudet - Ju jodan uchi uke, uki otoshi, ude hishigi hiza gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#FD7521;"></td>
+        <td class="orange">14. Påkslag mot huvudet, backhand - Ju morote jodan uke, kote gaeshi, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#FD7521;"></td>
+        <td class="orange">15. Knivhot mot magen - Grepp, shotei uchi jodan, kote gaeshi, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">1. Grepp i två handleder
+            framifrån - Shiho nage, shiho nage gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">2. Stryptag framifrån - O soto
+            otoshi, ude hishigi hiza gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">3. Stryptag bakifrån med vänster arm - Maesabaki, kuzure ude gatami, kote gaeshi, ude hishigi
+            hiza gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">4. Grepp i kläderna med tryck - Ude osae, ude osae gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">5. Grepp i kläderna med drag - O soto otoshi, ude hishigi hiza gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">6. Grepp om nacken och en knästöt - Gedan juji uke, kawashi, koshi otoshi, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">7. Livtag under armarna bakifrån - Ude osae, ude osae gatame
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">8. Högt livtag över armarna bakifrån - Maesabaki, kuzure ude osae, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">9. Stryptag mot liggande sittande mellan benen - Frigöring
+        </td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">10. Svingslag mot liggande mot huvudet - Jodan chikai uke, hiza kansetsu waza
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">11. Rakt slag mot huvudet - Jodan soto uke, o soto otoshi, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">12. Cirkulär spark mot benen - San ren uke, o soto osae, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">13. Påkslag mot huvudet, backhand - Ju morote jodan uke, ude osae, ude osae gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">14. Knivhot mot halsen, vänster sida - Grepp, kin geri
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">15. Knivhot mot halsen, höger sida - Grepp, kin geri
+        </td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">1. Stryptag från sidan med tryck - Kote hineri, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">2. Stryptag bakifrån - O soto otoshi, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">3. Grepp i kläderna mot vägg - Tate hishigi, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">4 Försök till livtag över armarna framifrån - Uki otoshi, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">5. Livtag över armarna framifrån - O goshi, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">6. Försök till grepp om båda benen framifrån - Tai guruma, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">7. Stryptag mot liggande med armen - Frigöring, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">8. Spark mot liggande mot huvudet - San ren uke, hiza kansetsu waza
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">9. Hotfullt uppträdande - Ude hishigi
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">10. Kort svingslag - Jodan chikai uke, o soto otoshi, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">11. Långt svingslag - Morote jodan uke, hiza geri, tai guruma, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">12. Svingslag, backhand - Morote jodan uke, irimi nage, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">13. Påkslag mot huvudet, backhand - Ju jodan uchi uke, irimi nage, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">14. Grepp och knivhot mot magen - Grepp, kin geri, kote gaeshi, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">15. Två motståndare, grepp i kläderna - Ude osae
+        </td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">1. Grepp i håret med två händer och knästöt - Gedan juji uke, waki gatame, ude osae gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">2. Stryptag från sidan - Harai goshi, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">3. Stryptag bakifrån - Jodan chikai uke, sukui nage, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">4. Stryptag med armen med drag - O soto otoshi, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">5. Kravattgrepp framifrån - Chudan tski, kote hineri, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">6. Kravattgrepp med nedbrytning i sidled - Frigöring, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">7. Grepp i kläderna med tryck - Kote mawashi, ude osae gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">8. Flera svingslag mot liggande sittande på magen - Jodan chikai uke, frigöring
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">9. Hotfullt närmande mot liggande - Uppgång framåt, jodan chikai uke, hiza kansetsu waza
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">10. Hotfullt uppträdande - Hara osae, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">11. Kort svingslag - Jodan chikai uke, uki otoshi, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">12. Kort svingslag - Jodan chikai uke, ko uchi gari
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">13. Rak spark mot magen - Gedan uchi uke, irimi nage, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">14. Påkslag mot huvudet forehand och backhand - Tsuri ashi, ayumi ashi, ju jodan uchi uke,
+            irimi nage, ude hishigi hiza
+            gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">15. Påkslag mot huvudet backhand och forehand - Tsuri ashi, ayumi ashi, morote jodan uke, o
+            soto osae, ude hishigi hiza
+            gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">16. Grepp och knivhot mot halsen, höger sida - Grepp waki gatame, ude hiza osae gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">17. Knivhot mot halsen bakifrån med höger arm - Maesabaki, kuzure ude osae, ude hiza osae
+            gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">18. Knivhot mot halsen bakifrån med vänster arm - Maesabaki, kuzure ude garami, kote gaeshi,
+            ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">19. Två motståndare, svingslag och svingslag - Morote jodan uke, hiza geri, tai guruma morote
+            jodan uke, hiza geri, tai
+            guruma
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">1. Grepp i håret framifrån - Kote mawashi, ude osae gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">2. Stryptag framifrån - Koshi guruma, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">3. Styptag med armen med neddrag - Ura makikomi, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">4. Stryptag med armen med neddrag - Hiza kansetsu waza
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">5. Kravattgrepp med nedbrytning i sidled - Frigöring, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">6. Dubbelnelson med nedbrytning - Frigöring, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">7. Grepp i en ärm - Ude hishigi, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">8. Grepp i kragen med neddrag - Hiza kansetsu waza
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">9. Högt livtag över armarna bakifrån
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">10. Grepp i håret för att dunka huvudet mot underlaget - Frigöring, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">11. Flera svingslag mot liggande mot huvudet - Jodan chikai uke, frigöring, ude henkan
+            gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">12. Hotfullt närmande mot liggande - Uppgång framåt, jodan chikai uke, koshi otoshi, ude
+            henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">13. Hotfullt uppträdande - Kuzure ude guruma
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">14. Svingslag backhand - Morote jodan uke, waki gatame, ude osae gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">15. Påkslag mot huvudet - Morote jodan uke, hiza geri, tai guruma, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">16. Knivskärning forehand och backhand - Tsuri ashi, ju jodan uchi uke, irimi nage, ude
+            hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">17. Knivskärning backhand och forehand - Tsuri ashi, morote jodan uke, hiza geri, kuzure
+            ude guruma
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">18. Pistolhot framifrån - Grepp, kin geri
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">19. Två motståndare, knivhot och svingslag - Grepp, shotei uchi jodan, morote jodan uke,
+            hiza geri, tai guruma
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">1. Grepp i håret bakifrån med neddrag - Shiho nage, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">2. Kravattgrepp från sidan - Tani otoshi, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">3. Grepp om nacken och flera knästötar - Gedan juji uke, kawashi, iriminage, ude henkan
+            gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">4. Grepp i en ärm och svingslag - Jodan chikai uke, kuzure ude guruma
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">5. Grepp bakifrån med vänster hand och svingslag - Jodan chikai uke, o soto otoshi, ude
+            hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">6. Nedtryckning mot liggande sittande mellan benen - Frigöring, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">7. Strypag mot liggande sittande ovanför huvudet - Frigöring, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">8. Svingslag mot liggande mot huvudet - Kuzure kibisu gaeshi
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">9. Spark mot liggande mot kroppen - San ren uke, kuzure hiza kansetsu waza
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">10. Hotfullt uppträdande - Hiji gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">11. Rakt slag mot huvudet - Jodan soto uke, te guruma, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">12. Cirkulär spark mot sidan - Gedan uchi uke, o uchi gari
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">13. Påkslag mot huvudet med lång påk - Tsuri ashi, ayumi ashi, koshi otoshi, ude hishigi
+            hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">14. Påkslag mot benen med lång påk - San ren uke, o soto osae, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">15. Grepp om nacken och flera knivhugg underifrån - Chudan barai, hara osae, ude hiza osae
+            gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">16. Flera knivhugg underifrån - Chudan barai, seiken tski jodan, hiza
+            geri chudan, kuzure ude guruma
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">17. Pistolhot bakifrån - Grepp, kin geri
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">18. Två motståndare, svingslag och svingslag - Jodan chikai uke, yoko geri chudan, o soto
+            otoshi
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">Två motståndare, påkslag forehand, backhand och svingslag - Tsuri ashi, ayumi ashi, ju
+            jodan uchi uke, irimi nage, påkslag
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">1. Stryptag framifrån med tryck - Tsuri komi, tai otoshi, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">2. Kravattgrepp med nedbrytning framåt - Yoko guruma
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">3. Grepp i kläderna med tryck - Tomoe nage
+            hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">4. Grepp i kläderna och flera svingslag - Jodan chikai uke, o soto otoshi, ude hishigi
+            hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">5. Grepp bakifrån med höger hand och svingslag - Jodan chikai uke, ude gatame, ude osae
+            gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">6. Försök till grepp om båda benen framifrån - Sumi gaeshi
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">7. Livtag under armarna framifrån med upplyft - Tate hishigi, o soto osae, ude henkan
+            gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">8. Livtag under armarma bakifrån med upplyft - Hiza kansetsu waza
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">9. Spark mot liggande mot benen - Morote gedan uke, hiza kansetsu waza
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">10. Knivhot mot liggande sittande mellan benen - Frigöring, ude hiza osae gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">11. Hotfullt uppträdande - Kuzure kote gaeshi gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">12. Påkslag mot huvudet forehand och backhand - Blockering med påk, påkslag
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">13. Påkstöt mot magen med lång påk - Tsuri ashi, grepp, kote gaeshi, ude hishigi hiza
+            gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">14. Påkstöt mot magen med lång påk - Tsuri ashi, grepp, o soto otoshi, ude hishigi hiza
+            gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">15. Flera knivstick mot magen - Chudan barai, seiken tski jodan, kote gaeshi, ude hishigi
+            hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">16. Flera knivstick mot magen - Chudan barai, seiken tski jodan, waki gatame, ude hiza
+            osae gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">17. Knivskärning forehand och backhand - Blockering med påk, påkslag
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">18. Pistolhot mot huvudet - Grepp, kin geri
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">19. Ingripa mot flera svingslag - Irimi nage, ude hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">20. Två motståndare, svingslag och försök till stryptag - Mae geri, harai goshi
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">21. Två motståndare, svingslag och stryptag med armen med neddrag - Mae geri, ura
+            makikomi
+        </td>
+        <td></td>
+    </tr>
+
+
+
+
+
+
+    <tr>
+        <th></th>
+        <th>RENRAKU WAZA</th>
+        <th>TOTALT</th>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+
+        <td class="yellow">1. Försök till stryptag framifrån - Försök till kravattgrepp från sidan = Jodan soto uke -
+            Jodan chikai uke, kawashi,
+            koshi otoshi, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">1. Grepp i två handleder framifrån - Kort svingslag = Frigöring - Jodan chikai uke, kawashi,
+            koshi otoshi, ude henkan
+            gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">2. Hotfullt närmande - Långt svingslag = Morote jodan uke, o soto osae, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">1. Grepp i två handleder bakifrån - Rak spark mot magen = Frigöring - Gedan uchi uke, koshi
+            otoshi, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">2. Hotfullt närmande mot liggande - Långt svingslag = Uppgång bakåt - Ju jodan uchi uke, uki
+            otoshi, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">1. Försök till grepp i kläderna - Chudan soto uke. koshi otoshi, ude henkan gatame = Valfri
+            jigo waza anpassade efter
+            ukes agerande</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">2. Grepp i kläderna med drag - O soto otosho, ude hishigi hiza gatame = Valfri jigo waza
+            anpassade efter ukes agerande</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+        <td class="blue">3. Cirkulär spark mot benen - San ren uke, o soto osae, ude henkan gatame = Valfri jigo waza
+            anpassad efter ukes
+            agerande</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">1. Stryptag bakifrån - O soto otoshi, ude hishigi hiza gatame = Valfri jigo waza anpassad
+            efter ukes agerande</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">2. Grepp om nacken och en knästöt - Gedan juji uke, frigöring = Valfri jigo waza anpassad
+            efter ukes agerande</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #482728;"></td>
+        <td class="brown">3. Livtag över armara framifrån - O goshi, ude hishigi hiza gatame = Valfri jigo waza anpassad
+            efter ukes agerande</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">1. Stryptag bakifrån - Sukui nage, udehishigi hiza gatame = Valfri jigo waza anpassad efter
+            ukes agerande
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;
+"></td>
+        <td class="blackone">2. Stryptag med armen - Maesabaki, kuzure ude osae, ude henkan gatame = Valfri jigo waza
+            anpassad efter ukes agerande
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">3. Svingslag, backhand - Morote jodan uke, irimi nage, ude henkan gatame = Valfri jigo waza
+            anpassad efter ukes agerande
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;">
+        </td>
+        <td class="blacktwo">1. Grepp i håret framifrån - Kote mawashi, ude osae gatame = Valfri jigo anpassad efter
+            ukes agerande</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">2. Kravattgrepp framifrån - Chudan tski, kote hineri, ude henkan gatame = Valfri jigo
+            anpassad efter
+            ukes agerande
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;">
+        </td>
+        <td class="blacktwo">3. Högt livtag över armarna bakifrån - Hiza kansetsu waza = Valfri jigo anpassad efter
+            ukes agerande
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">4. Hotfullt närmande - Ude hishigi = Valfri jigo anpassad efter
+            ukes agerande
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">1. Kravattgrepp - Tani otoshi = Valfri jigo anpassad efter
+            ukes agerande
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">2. Flera slag mot liggande sittande på magen - Jodan chikai uke, frigöring = Valfri jigo
+            anpassad efter
+            ukes agerande
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">3. Spark mot liggande mot huvudet - San ren uke, hiza kansetsu waza = Valfri jigo
+            anpassad efter
+            ukes agerande
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">4. Hotfullt uppträdande - Hiji gatame = Valfri jigo anpassad efter
+            ukes agerande
+        </td>
+        <td></td>
+    </tr>
+
+
+
+
+    <tr>
+        <th></th>
+        <th>YAKOSUKO GEIKO</th>
+        <th>TOTALT</th>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+
+        <td class="yellow">1. Försvar
+            mot en motståndare</td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+
+        <td class="orange">1. Försvar
+            mot en motståndare</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+
+        <td class="green">1. Försvar
+            mot en motståndare</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">1. Försvar mot två motståndare
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">2. Försvar mot en motståndare som angriper med påk
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">1. Försvar mot en motståndare som angriper med påk
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blacktwo">2. Försvar mot en motståndare som angriper med kniv
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackthree">1. Försvar mot en motståndare som angriper med kniv
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <th></th>
+        <th>RANDORI</th>
+        <th>TOTALT</th>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #345995;"></td>
+
+        <td class="blue">1. Försvar
+            mot en motståndare</td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #482728;"></td>
+
+        <td class="brown">1. Försvar
+            mot en motståndare</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black linear-gradient(yellow, yellow) no-repeat center 50% / 100% 2px;"></td>
+        <td class="blackone">1. Försvar mot en motståndare
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blackone">1. Försvar mot en motståndare
+        </td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat; background-position: center 30%, center 70%;
+            background-size: 100% 2px, 100% 2px;"></td>
+        <td class="blackone">2. Försvar mot två motståndare
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackone">1. Försvar mot en motståndare
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackone">2. Försvar mot två motståndare
+        </td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background: black;
+            background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow);
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            background-position: center 25%, center 50%, center 75%;
+            background-size: 100% 2px, 100% 2px, 100% 2px; "></td>
+        <td class="blackone">3. Försvar mot två motståndare som angriper med påk
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <th></th>
+        <th>GRUNDLÄGGANDE TEKNIKER</th>
+        <th>TOTALT</th>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Kamae neutral</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Kamae beredd</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Kamae med gard</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Tsuri ashi, framåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Tsuri ashi, bakåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ayumi ashi, samma kamae</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ayumi ashi, växlande kamae</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Taisabaki kort, vänster</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Taisabakai kort, höger</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Taisabaki lång vänster</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Taisabaki lång, höger</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Maesabaki</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Uppgång bakåt</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Uppgång framåt</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Kawashi</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ushiro ukemi, med dämpning</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Mae ukemi</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ushiro ukemi</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Mae ukemi, med dämpning</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Otoshi ukemi</td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Jodan chikai uke</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Morote jodan uke</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ju morote jodan uke</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Gedan juji uke</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Soto uke, jodan</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Soto uke, chudan</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Soto uke, gedan</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Uchi uke, jodan</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Uchi uke, chudan</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Uchi uke, gedan</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ju jodan uchi uke</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">San ren uke</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Chudan barai</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ude osae gatame</td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ude hishigi hiza gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ude hiza osae gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Kote gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Kata osae</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Kuzure kata osae</td>
+        <td></td>
+    </tr>
+</table>`
+            document.getElementById("results").innerHTML = HTML;
+        }
+        else {
+            let HTML = `<table id="plan_table" class="overview-table">
+    <tr>
+        <th></th>
+        <th colspan="2">KIHON WAZA</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr>
+        <th></th>
+        <th>ATEMI WAZA</th>
+        <th>TOTALT</th>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFF370;"></td>
+
+        <td class="yellowwhite">1. Gedan geri, rak spark med främre och bakre benet</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+
+        <td class="yellow ">1. Shotei uchi, chudan, rak stöt med främre och bakre handen</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FEB486;"></td>
+
+        <td class="orangewhite">1. Chudan tski, stöt snett uppåt med bakre handen</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+
+        <td class="orange">1. Hiza geri, chudan, rak knästöt med bakre benet</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#A2CDB7;"></td>
+        <td class="greenwhite">1. Kin geri, gedan, spark snett uppåt med främre och
+            bakre benet</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">1. Mae geri, chudan, rak spark med främre och bakre benet</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <th></th>
+        <th>KANSETSU WAZA</th>
+        <th>TOTALT</th>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">1. O soto osae, utan grepp, nedläggning snett bakåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">1. Kote gaeshi, grepp i handleden, nedläggning snett bakåt
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#A2CDB7;"></td>
+        <td class="greenwhite">1. Ude osae, i rörelse, cirkulär nedläggning</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">1. Ude osae, grepp i kragen med tryck, nedläggning framåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+
+        <th></th>
+        <th>NAGE WAZA</th>
+        <th>TOTALT</th>
+    </tr>
+
+    <tr>
+
+        <td style="background-color: #FFF370;"></td>
+        <td class="yellowwhite">1. Koshi otoshi, utan grepp, nedläggning snett bakåt
+        </td>
+        <td></td>
+
+    </tr>
+
+    <tr>
+        <td style="background-color: #FEB486;"></td>
+        <td class="orangewhite">1. Uki otoshi, i rörelse, nedläggning snett framåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#A2CDB7;"></td>
+        <td class="greenwhite">1. O soto otoshi, utan grepp, nedläggning snett bakåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">1. O soto otoshi, grepp i kragen med drag, nedläggning snett bakåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <th></th>
+        <th>JIGO WAZA</th>
+        <th>TOTALT</th>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFF370;"></td>
+
+        <td class="yellowwhite">1. Grepp i två handleder framifrån - Frigöring</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFF370;"></td>
+
+        <td class="yellowwhite">2. Grepp i två handleder bakifrån - Frigöring</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFF370;"></td>
+
+        <td class="yellowwhite">3. Försök till stryptag framifrån - Jodan soto uke</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFF370;"></td>
+
+        <td class="yellowwhite">4. Stryptag framifrån - Kawashi, frigöring</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFF370;"></td>
+
+        <td class="yellowwhite">5. Stryptag bakifrån - Maesabaki, kawashi, frigöring</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFF370;"></td>
+
+        <td class="yellowwhite">6. Försök till kravattgrepp från sidan - Jodan chikai uke, kawashi, koshi otoshi, ude
+            henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFF370;"></td>
+        <td class="yellowwhite">7. Stryptag mot liggande sittande vid sidan - Frigöring, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFF370;"></td>
+        <td class="yellowwhite">8. Hotfullt närmande - Hejda med tryck</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">1. Grepp i håret bakifrån - Tettsui uchi, frigöring</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">2.
+            Stryptag med armen - Maesabaki, kuzure ude osae, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">3. Grepp i ärmen med drag - O soto osae, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">4. Hotfullt närmande mot liggande - Uppgång bakåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">5. Kort svingslag - Jodan chikai uke, kawashi, koshi otoshi,
+            ude
+            henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">6.
+            Långt svingslag - Morote jodan uke, o soto osae, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+        <td class="yellow">7. Påkslag mot huvudet - Ju morote jodan uke</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FEB486;"></td>
+        <td class="orangewhite">1. Grepp i håret framifrån -
+            Frigöring</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FEB486;"></td>
+        <td class="orangewhite">2. Försök till
+            stryptag framifrån - Uki otoshi, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FEB486;"></td>
+        <td class="orangewhite">3. Stryptag framifrån mot vägg
+            Tsuri komi</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FEB486;"></td>
+        <td class="orangewhite">4. Kravattgrepp
+            från sidan - Ushiro osae, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FEB486;"></td>
+        <td class="orangewhite">5. Grepp i kläderna med tryck - Kuzure ude garami,
+            ushiro osae, ude henkan
+            gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FEB486;"></td>
+        <td class="orangewhite">6. Stryptag mot
+            liggande sittande mellan benen - Frigöring, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FEB486;"></td>
+        <td class="orangewhite">7. Långt svingslag - Ju jodan uchi uke, uki otoshi, ude
+            henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">1. Grepp i en handled framifrån
+            med två händer med drag - Frigöring</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">2. Grepp i två handleder
+            bakifrån - Kote gaeshi, ude hishigi hiza gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">4. Försök till grepp i kläderna
+            - Chudan soto uke, koshi otoshi, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">3. Grepp om
+            nacken och en knästöt - Gedan juji uke, kawashi, frigöring</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">5. Rak spark
+            mot magen - Gedan uchi uke, koshi otoshi, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">6. Påkslag mot huvudet - Ju jodan uchi uke, uki otoshi, ude
+            hishigi hiza gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">7. Påkslag mot huvudet, backhand - Ju morote jodan uke, kote
+            gaeshi, ude hishigi
+            hiza
+            gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#A2CDB7;"></td>
+        <td class="greenwhite">1. Stryptag bakifrån med vänster arm - Maesabaki, kuzure
+            ude garami, kote
+            gaeshi,
+            ude
+            hishigi
+            hiza gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#A2CDB7;"></td>
+        <td class="greenwhite">2. Grepp om nacken och en knästöt - Gedan juji uke,
+            kawashi, koshi otoshi,
+            ude
+            henkan
+            gatame</td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color:#A2CDB7;"></td>
+        <td class="greenwhite">3. Grepp i
+            kläderna med drag - O soto otoshi, ude hishigi hiza gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#A2CDB7;"></td>
+        <td class="greenwhite">4. Livtag under
+            armarna bakifrån - Ude osae, ude osae gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#A2CDB7;"></td>
+        <td class="greenwhite">5. Stryptag mot liggande sittande mellan benen -
+            Frigöring</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#A2CDB7;"></td>
+        <td class="greenwhite">6. Påkslag mot huvudet, backhand - Ju morote jodan uke,
+            ude osae, ude osae
+            gatame</td>
+        <td></td>
+    </tr>
+
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">1. Grepp i två handleder
+            framifrån - Shiho nage, shiho nage gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">2. Stryptag framifrån - O soto
+            otoshi, ude hishigi hiza gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">3. Grepp i kläderna med tryck
+            - Ude osae, ude osae gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">4. Högt livtag över armarna
+            bakifrån - Maesabaki, kuzure ude osae, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">5. Svingslag mot liggande mot huvudet - Jodan chikai uke,
+            hiza kansetsu waza</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">6. Rakt slag mot huvudet - Jodan soto uke, o soto otoshi, ude
+            hishigi hiza
+            gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <th></th>
+        <th>RENRAKU WAZA</th>
+        <th>TOTALT</th>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FFEB0A;"></td>
+
+        <td class="yellow">1. Försök till stryptag framifrån - Försök till kravattgrepp
+            från sidan = Jodan
+            soto uke
+            - Jodan chikai uke, kawashi.
+            koshi otoshi, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FEB486;"></td>
+        <td class="orangewhite">1. Grepp i två handleder framifrån - Kort svingslag =
+            Frigöring - Jodan
+            chikai uke,
+            kawashi, koshi otoshi, ude henkan
+            gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #FD7521;"></td>
+        <td class="orange">2. Hotfullt närmande - Långt svingslag = Hejda med tryck -
+            Morote jodan uke, o
+            soto
+            osae, ude henkan gatame
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color:#A2CDB7;"></td>
+        <td class="greenwhite">2. Hotfull närmande mot liggande - Långt svingslag =
+            Uppgång bakåt - Ju
+            jodan uchi
+            uke, uki otoshi, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #40775A;"></td>
+        <td class="green">1. Grepp i två handleder bakifrån - Rak spark mot magen =
+            Frigöring - Gedan uchi
+            uke, koshi
+            otoshi, ude henkan gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <th></th>
+        <th>YAKOSUKO GEIKO</th>
+        <th>TOTALT</th>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+
+        <td class="all">1. Försvar
+            mot en motståndare
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <th></th>
+        <th>GRUNDLÄGGANDE TEKNIKER</th>
+        <th>TOTALT</th>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Tsuri ashi, framåt</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ushiro ukemi, med dämpning</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Jodan chikai uke</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ude henkan gatame</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Kamae neutral</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Tsuri ashi, bakåt</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Mae ukemi</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Morote jodan uke</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ude osae gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Kamae beredd</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ayumi ashi, samma kamae</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ushiro ukemi</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ju morote jodan uke</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ude hishigi hiza gatame</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Kamae med gard</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ayumi ashi, växlande kamae</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Mae ukemi, med dämpning</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Gedan juji uke</td>
+        <td></td>
+
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Taisabakai kort, höger</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Otoshi ukemi</td>
+        <td></td>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Soto uke, jodan</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Taisabaki kort, vänster</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Soto uke, chudan</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Taisabaki lång, höger</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Uchi uke, gedan</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Taisabaki lång vänster</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Ju jodan uchi uke</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Maesabaki</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Uppgång bakåt</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="background-color: #D474BE;"></td>
+        <td class="all">Kawashi</td>
+        <td></td>
+    </tr>
+
+</table>`
+            document.getElementById("results").innerHTML = HTML;
+
+        }
+
+        getgroupstat(group).then(function (reply) {
+
+            fill_overview(reply, true);
+
+        });
+    }
+
+}
 
 function get_group_statistics_plan() {
     let sel = document.getElementById("stat_group_plan")
@@ -455,6 +3178,106 @@ function get_group_statistics_plan() {
             }
         });
     }
+}
+
+function fill_overview(reply, pass_count) {
+
+    const uniqueDates = [...new Set(reply.map(o => o.date))].sort();
+
+    // 2. Map each teknik to the dates it appears in
+    const teknikMap = new Map();
+    reply.forEach(({ teknik, color, group, date }) => {
+        if (!teknikMap.has(teknik)) {
+            teknikMap.set(teknik, { color, dates: new Set() });
+        }
+        teknikMap.get(teknik).dates.add(date);
+    });
+
+    console.log(teknikMap);
+
+
+    // 3. Add <th> for each unique date to the header row
+    const table = document.getElementById("plan_table");
+    const headerRow = table.rows[0];
+
+    uniqueDates.forEach(date => {
+        const th = document.createElement("th");
+        headerRow.appendChild(th);
+    });
+
+    // 4. For each data row, match teknik and add <td> for each date
+    const expectedTdCount = 3 + uniqueDates.length; // 3 base columns (name, group, total) + dates
+
+    // Loop through all rows except the first one (header row)
+    for (let i = 1; i < table.rows.length; i++) {
+        const row = table.rows[i];
+
+        // Skip header rows (those that contain <th>)
+        const isHeaderRow = row.querySelectorAll("th").length > 0;
+        if (isHeaderRow) continue;
+
+        const teknikCell = row.querySelector("td:nth-child(2)");
+        const teknikName = teknikCell?.textContent.trim() || "";
+
+        console.log(`Processing teknik: ${teknikName}`); // Log the technique name
+
+        const teknikData = teknikMap.get(teknikName);
+        console.log(teknikData); // Log the fetched technique data
+
+        if (!teknikData) {
+            console.log(`No data found for teknik: ${teknikName}`);
+
+            // Add empty <td>s for all unique dates
+            uniqueDates.forEach(() => {
+                const emptyTd = document.createElement("td");
+                row.appendChild(emptyTd);
+            });
+        } else {
+            // Loop over unique dates to append <td> for each date
+            uniqueDates.forEach(date => {
+                const td = document.createElement("td");
+
+                // If the technique was performed on that date, mark it with a check
+                if (teknikData.dates.has(date)) {
+                    td.style.backgroundColor = "black";  // Add background color
+                    td.style.textAlign = "center";  // Center the text
+                }
+
+                // Append the new <td> to the row
+                row.appendChild(td);
+            });
+        }
+
+        // Now check if the row has the correct number of <td>s
+        const currentTdCount = row.querySelectorAll("td").length;
+
+        // If the row has fewer <td>s than expected, append empty <td>s
+        while (currentTdCount < expectedTdCount) {
+            const emptyTd = document.createElement("td");
+            row.appendChild(emptyTd);  // Append empty <td> until the row matches expectedTdCount
+        }
+    }
+}
+
+
+// Helper function for color styles
+function getColorStyle(color) {
+    const colorMap = {
+        yellow: 'background-color: #FFEB0A; color: #FFEB0A; border: 1px solid #24292E;',
+        orange: 'background-color: #FD7521; color: #FD7521; border: 1px solid #24292E;',
+        green: 'background-color: #40775A; color: #40775A; border: 1px solid #24292E;',
+        blue: 'background-color: rgb(52, 89, 149); color: rgb(52, 89, 149); border: 1px solid #24292E;',
+        brown: 'background-color: rgb(72, 39, 40); color: rgb(72, 39, 40); border: 1px solid #24292E;',
+        blackone: 'background: black; background-image: linear-gradient(yellow, yellow); background-repeat: no-repeat; background-position: center 50%; background-size: 100% 5px; border: 1px solid #24292E;',
+        blacktwo: 'background: black; background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow); background-repeat: no-repeat; background-position: center 30%, center 70%; background-size: 100% 5px, 100% 5px; border: 1px solid #24292E;',
+        blackthree: 'background: black; background-image: linear-gradient(yellow, yellow), linear-gradient(yellow, yellow), linear-gradient(yellow, yellow); background-repeat: no-repeat; background-position: center 25%, center 50%, center 75%; background-size: 100% 5px, 100% 5px, 100% 5px; border: 1px solid #24292E;',
+        yellowwhite: 'background-color: #FFF370; color: #FFF370; border: 1px solid #24292E;',
+        orangewhite: 'background-color: #FEB486; color: #FEB486; border: 1px solid #24292E;',
+        greenwhite: 'background-color: #A2CDB7; color: #A2CDB7; border: 1px solid #24292E;',
+        all: 'background-color: #D474BE; color: #D474BE; border: 1px solid #24292E;',
+    };
+
+    return colorMap[color] || '';
 }
 
 function fill_result(reply, pass_count) {

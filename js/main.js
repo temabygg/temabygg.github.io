@@ -48,6 +48,7 @@ async function router() {
     route === '/partials/mon.html' && setDate();
     route === '/partials/kuy.html' && setDate();
     route === '/partials/old-pass.html' && setDate();
+    route === '/partials/overview.html' && setDate();
     route === '/partials/plan-mon.html' && setDate();
     route === '/partials/plan-kuy.html' && setDate();
 
