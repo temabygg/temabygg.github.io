@@ -156,7 +156,7 @@ function createFile_kuy() {
 
     chosen.sort((a, b) => (a.class < b.class) ? 1 : ((b.class < a.class) ? -1 : 0))
 
-    let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt, samt spara passet i historiken och som en nedladdningsbar textfil.</h6><br>";
+    let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt och spara passet i historiken.</h6><br>";
 
     let statistics = "";
     let colors = [];
@@ -3615,7 +3615,7 @@ function createFile_mon() {
 
     chosen.sort((a, b) => (a.class < b.class) ? 1 : ((b.class < a.class) ? -1 : 0))
 
-    let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt, samt spara passet i historiken och som en nedladdningsbar textfil.</h6><br>";
+    let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt och spara passet i historiken.</h6><br>";
     let statistics = "";
     let colors = [];
     let date = document.getElementById("mon_date");
@@ -3911,7 +3911,7 @@ function saveplan_mon() {
 
     chosen.sort((a, b) => (a.class < b.class) ? 1 : ((b.class < a.class) ? -1 : 0))
 
-    let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt, samt spara passet i historiken och som en nedladdningsbar textfil.</h6><br>";
+    let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt och spara passet i historiken.</h6><br>";
 
     let statistics = "";
     let colors = [];
@@ -4131,7 +4131,7 @@ function saveplan_kuy() {
 
     console.log(chosen);
 
-    let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt, samt spara passet i historiken och som en nedladdningsbar textfil.</h6><br>";
+    let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt och spara passet i historiken.</h6><br>";
 
     let statistics = "";
     let colors = [];
@@ -4259,7 +4259,7 @@ function saveplan_kuy() {
             }
         }
 
-        window.print()
+        window.print();
 
         modal.style.display = "none";
 
@@ -4356,7 +4356,7 @@ function recreate_old_pass() {
             }
         }
 
-        let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt, samt spara passet i historiken och som en nedladdningsbar textfil.</h6><br>";
+        let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt och spara passet i historiken.</h6><br>";
         let statistics = "";
         let colors = [];
 
@@ -4513,7 +4513,7 @@ function print_pass() {
             }
         }
 
-        let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt, samt spara passet i historiken och som en nedladdningsbar textfil.</h6><br>";
+        let modal_cont = "<h4>Förhandsgranska ditt pass</h4><h6>Lägg till fritext och flytta runt teknikerna och texten i den ordning du vill ha det i.</h6><h6>När du är nöjd klickar du på knappen <span 'style=font-style: italic;'>Spara pass</span>, för att få upp en utskriftsprompt och spara passet i historiken.</h6><br>";
         let statistics = "";
         let colors = [];
 
