@@ -589,7 +589,7 @@ input[type="checkbox"] {
 }
 
 .overview-table td {
-    width: auto;
+    width: 40px;
 }
 
 

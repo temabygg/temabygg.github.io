@@ -1,3 +1,4 @@
+const { log } = require("console");
 
 function setDate() {
     let dates = document.getElementsByClassName('thisdate');
@@ -3188,9 +3189,11 @@ function fill_overview(reply, pass_count) {
     const teknikMap = new Map();
     reply.forEach(({ teknik, color, group, date }) => {
         if (!teknikMap.has(teknik)) {
-            teknikMap.set(teknik, { color, dates: new Set() });
+            teknikMap.set(teknik, { color, dates: new Set(), count: 0 });
         }
-        teknikMap.get(teknik).dates.add(date);
+        const entry = teknikMap.get(teknik);
+        entry.dates.add(date);
+        entry.count++;
     });
 
     console.log(teknikMap);
@@ -3198,12 +3201,18 @@ function fill_overview(reply, pass_count) {
 
     // 3. Add <th> for each unique date to the header row
     const table = document.getElementById("plan_table");
-    const headerRow = table.rows[0];
+    for (let i = 1; i < table.rows.length; i++) {
+        const row = table.rows[i];
+        const headerRow = row.querySelectorAll("th").length > 0;
+        if (headerRow) {
+            uniqueDates.forEach(date => {
+                const th = document.createElement("th");
+                row.appendChild(th);
+            });
+        }
 
-    uniqueDates.forEach(date => {
-        const th = document.createElement("th");
-        headerRow.appendChild(th);
-    });
+    }
+
 
     // 4. For each data row, match teknik and add <td> for each date
     const expectedTdCount = 3 + uniqueDates.length; // 3 base columns (name, group, total) + dates
@@ -3213,25 +3222,24 @@ function fill_overview(reply, pass_count) {
         const row = table.rows[i];
 
         // Skip header rows (those that contain <th>)
+
         const isHeaderRow = row.querySelectorAll("th").length > 0;
         if (isHeaderRow) continue;
 
         const teknikCell = row.querySelector("td:nth-child(2)");
         const teknikName = teknikCell?.textContent.trim() || "";
 
-        console.log(`Processing teknik: ${teknikName}`); // Log the technique name
-
         const teknikData = teknikMap.get(teknikName);
-        console.log(teknikData); // Log the fetched technique data
 
         if (!teknikData) {
-            console.log(`No data found for teknik: ${teknikName}`);
 
             // Add empty <td>s for all unique dates
             uniqueDates.forEach(() => {
                 const emptyTd = document.createElement("td");
                 row.appendChild(emptyTd);
             });
+            row.children[2].innerHTML = 0;
+
         } else {
             // Loop over unique dates to append <td> for each date
             uniqueDates.forEach(date => {
@@ -3239,23 +3247,27 @@ function fill_overview(reply, pass_count) {
 
                 // If the technique was performed on that date, mark it with a check
                 if (teknikData.dates.has(date)) {
-                    td.style.backgroundColor = "black";  // Add background color
+                    td.style.backgroundColor = "#24292e38";  // Add background color
                     td.style.textAlign = "center";  // Center the text
                 }
 
                 // Append the new <td> to the row
                 row.appendChild(td);
+                row.children[2].innerHTML = teknikMap.get(teknikName)?.count;
+
             });
         }
 
         // Now check if the row has the correct number of <td>s
         const currentTdCount = row.querySelectorAll("td").length;
 
+
         // If the row has fewer <td>s than expected, append empty <td>s
         while (currentTdCount < expectedTdCount) {
             const emptyTd = document.createElement("td");
             row.appendChild(emptyTd);  // Append empty <td> until the row matches expectedTdCount
         }
+
     }
 }
 
